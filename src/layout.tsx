@@ -11,11 +11,12 @@ import {
 	useMediaQuery,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Settings } from '@mui/icons-material';
 import Cities from 'pages/Cities';
 import WeatherInfo from 'pages/WeatherInfo';
 import { Routes, Route } from 'react-router-dom';
 import NavigationButtons from 'components/Navigation/NavigationButtons';
+import Map from 'pages/map';
+import Settings from 'pages/Settings';
 
 function ResponsiveLayout() {
 	const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -94,6 +95,7 @@ function ResponsiveLayout() {
 						<Routes>
 							<Route path="/" element={<WeatherInfo />} />
 							<Route path="/cities" element={<Cities />} />
+                            <Route path="/map" element={<Map />} />
 							<Route path="/settings" element={<Settings />} />
 						</Routes>
 					</Box>

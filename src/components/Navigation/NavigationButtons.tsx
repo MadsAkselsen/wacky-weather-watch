@@ -10,10 +10,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Link from '@mui/material/Link';
 
 export default function NavigationButtons() {
-	const [open, setOpen] = React.useState(true);
 
 	const handleClick = () => {
-		setOpen(!open);
 	};
 
 	return (
@@ -45,7 +43,7 @@ export default function NavigationButtons() {
 					<ListItemText primary="Cities" />
 				</ListItemButton>
 			</Link>
-			<Link href="/settings" color="black" underline="none">
+			<Link href="/map" color="black" underline="none">
 				<ListItemButton
 					onClick={handleClick}
 					dense={true}
