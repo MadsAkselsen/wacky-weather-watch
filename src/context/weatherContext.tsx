@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
+import React, { useContext, useState, Dispatch, SetStateAction } from 'react';
 
 export interface WeatherData {
     name: string;
