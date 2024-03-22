@@ -1,12 +1,23 @@
+import { Menu } from '@mui/material';
+import { WeatherContextProvider } from 'context/weatherContext';
+import Cities from 'pages/Cities';
+import Settings from 'pages/Settings';
+import WeatherInfo from 'pages/WeatherInfo';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-
-    </div>
+    <Router>
+      <WeatherContextProvider>
+        <Menu open />
+        <Routes>
+          <Route path="/" element={<WeatherInfo />} />
+          <Route path="/cities" element={<Cities />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </WeatherContextProvider>
+    </Router>
   );
 }
 
