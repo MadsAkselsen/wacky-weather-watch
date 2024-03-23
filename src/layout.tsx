@@ -15,6 +15,7 @@ import Cities from 'pages/Cities';
 import WeatherInfo from 'pages/WeatherInfo';
 import { Routes, Route } from 'react-router-dom';
 import NavigationButtons from 'components/Navigation/NavigationButtons';
+import Search from 'components/Search/Search';
 import Map from 'pages/map';
 import Settings from 'pages/Settings';
 
@@ -43,12 +44,13 @@ function ResponsiveLayout() {
 								<MenuIcon />
 							</IconButton>
 							{/* Search input for mobile */}
-							<TextField
+							<Search />
+							{/* <TextField
 								label="Search"
 								variant="outlined"
 								size="small"
 								style={{ marginLeft: 8, flexGrow: 1 }}
-							/>
+							/> */}
 						</Toolbar>
 					</AppBar>
 
@@ -74,9 +76,7 @@ function ResponsiveLayout() {
 				{!isMobile && (
 					<Grid
 						item
-						md={1}
-						lg={1}
-						style={{ border: '1px solid black', height: '100vh' }}
+						style={{ border: '1px solid black', height: '100vh', width: "80px" }}
 					>
 						<NavigationButtons />
 					</Grid>
@@ -84,12 +84,13 @@ function ResponsiveLayout() {
 				<Grid item xs={12} md={9} lg={10}>
 					{/* Search bar for desktop */}
 					<Box display={{ xs: 'none', md: 'block' }}>
-						<TextField
+						<Search />
+						{/* <TextField
 							label="Search"
 							variant="outlined"
 							fullWidth
 							margin="normal"
-						/>
+						/> */}
 					</Box>
 					<Box p={3} style={{ border: '1px solid black' }}>
 						<Routes>
