@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { ActionMeta, CSSObjectWithLabel } from 'react-select';
-import {
-	getCities,
-    getWeather,
-} from 'api/WeatherService';
+import { getCities, getWeather } from 'api/WeatherService';
 import { CityOption } from 'types/types';
+import { WeatherContext, WeatherContextType } from 'context/weatherContext';
 
 // Custom styles for <AsyncPaginate >
 const customStyles = () => {
@@ -38,20 +36,19 @@ const customStyles = () => {
 	};
 };
 
-
 const Search: React.FC = () => {
 	const [search, setSearch] = useState<CityOption | null>(null);
-	// const [currentWeather, setCurrentWeather] = useState(null);
-	// const [forecast, setForecast] = useState(null);
+	const { setWeatherData } = useContext(WeatherContext) as WeatherContextType;
 
 	const onSearchChange = (searchData: CityOption) => {
-        updateWeather(searchData)
+		updateWeather(searchData);
 	};
 
-    const updateWeather = async (searchData: CityOption) => {
-        const weatherData = await getWeather(searchData)
-        console.log("weatherData2", weatherData)
-    }
+	const updateWeather = async (searchData: CityOption) => {
+		const weatherData = await getWeather(searchData);
+        // console.log("Weather data: ", weatherData)
+		setWeatherData(weatherData);
+	};
 
 	const loadOptions = (inputValue: string) => {
 		return getCities(inputValue)
@@ -91,7 +88,7 @@ const Search: React.FC = () => {
 			onSearchChange(newValue);
 		}
 	};
-    
+
 	return (
 		<AsyncPaginate
 			placeholder="Search for city"

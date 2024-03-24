@@ -1,37 +1,21 @@
 import React, { useContext, useState, Dispatch, SetStateAction } from 'react';
+import { WeatherAndForecastData } from 'types/types';
 
-export interface WeatherData {
-    name: string;
-    main: {
-        temp: number;
-        feels_like: number;
-        temp_min: number;
-        temp_max: number;
-        pressure: number;
-        humidity: number;
-    };
-    wind: {
-        speed: number;
-    };
-    weather: {
-        description: string;
-    }[];
+
+export interface WeatherContextType {
+    weatherData: WeatherAndForecastData|null;
+    setWeatherData: Dispatch<SetStateAction<WeatherAndForecastData|null>>;
 }
 
-interface WeatherContextType {
-    state: WeatherData|null;
-    setState: Dispatch<SetStateAction<WeatherData|null>>;
-}
+const initialState: WeatherAndForecastData|null = null;
 
-const initialState: WeatherData|null = null;
-
-const WeatherContext = React.createContext<WeatherContextType | null>(null);
+export const WeatherContext = React.createContext<WeatherContextType | null>(null);
 
 export const WeatherContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-    const [state, setState] = useState<WeatherData|null>(initialState);
+    const [weatherData, setWeatherData] = useState<WeatherAndForecastData|null>(initialState);
 
     return (
-        <WeatherContext.Provider value={{ state, setState }}>
+        <WeatherContext.Provider value={{ weatherData, setWeatherData }}>
             {children}
         </WeatherContext.Provider>
     );
