@@ -1,4 +1,5 @@
-import { CityOption } from "types/types";
+import { CityOption } from 'types/types';
+import { GeoAPIMockData, WeatherAndForecastMockData } from './mockData';
 
 export const geoApiOptions = () => {
 	const apiKey = process.env.REACT_APP_X_RAPID_API_KEY;
@@ -21,6 +22,10 @@ const citiesSearchCache = new Map<string, any>();
 const weatherCache = new Map<string, any>();
 
 export const getCities = async (inputValue: string) => {
+	// Use mock data if the environment variable is set to save API calls
+	if (process.env.REACT_APP_USE_MOCK_DATA) {
+		return GeoAPIMockData;
+	}
 	// Check if the response for the inputValue is already in the cache
 	if (citiesSearchCache.has(inputValue)) {
 		console.log('Returning cached data for:', inputValue);
@@ -43,6 +48,10 @@ export const getCities = async (inputValue: string) => {
 };
 
 export const getWeather = async (searchData: CityOption) => {
+	// Use mock data if the environment variable is set to save API calls
+	if (process.env.REACT_APP_USE_MOCK_DATA) {
+		return WeatherAndForecastMockData;
+	}
 	// const [lat, lon] = searchData.value.split(' ');
 	const [cityName, _] = searchData.label.split(' ');
 
@@ -51,7 +60,7 @@ export const getWeather = async (searchData: CityOption) => {
 		console.log('Returning cached data for:', cityName.toLowerCase());
 		return weatherCache.get(cityName.toLowerCase()); // Return cached data
 	}
-	
+
 	try {
 		// const currentWeatherFetch = fetch(
 		// 	`${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`,
@@ -67,15 +76,14 @@ export const getWeather = async (searchData: CityOption) => {
 		);
 
 		const weatherData = await weatherResponse.json();
-		const forcastData = await forcastResponse.json();
+		const forecastData = await forcastResponse.json();
 
 		// Cache the response for future requests
-		weatherCache.set(cityName.toLowerCase(), { weatherData, forcastData });
+		weatherCache.set(cityName.toLowerCase(), { weatherData, forecastData });
 
-		return { weatherData, forcastData };
-
+		return { weatherData, forecastData };
 	} catch (error) {
 		console.error('Failed to fetch weather:', error);
 		return null;
 	}
-}
+};
