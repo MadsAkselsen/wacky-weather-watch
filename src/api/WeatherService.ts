@@ -1,3 +1,5 @@
+import { CityOption } from "types/types";
+
 export const geoApiOptions = () => {
 	const apiKey = process.env.REACT_APP_X_RAPID_API_KEY;
 	if (!apiKey) {
@@ -16,6 +18,7 @@ export const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5';
 export const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY; // openweather API
 
 const citiesSearchCache = new Map<string, any>();
+const weatherCache = new Map<string, any>();
 
 export const getCities = async (inputValue: string) => {
 	// Check if the response for the inputValue is already in the cache
@@ -35,6 +38,44 @@ export const getCities = async (inputValue: string) => {
 
 		return jsonResponse;
 	} catch (error) {
-		console.error('Primary GEO API failed, attempting backup:', error);
+		console.error('GEO API failed', error);
 	}
 };
+
+export const getWeather = async (searchData: CityOption) => {
+	// const [lat, lon] = searchData.value.split(' ');
+	const [cityName, _] = searchData.label.split(' ');
+
+	// Check if the response for the inputValue is already in the cache
+	if (weatherCache.has(cityName.toLowerCase())) {
+		console.log('Returning cached data for:', cityName.toLowerCase());
+		return weatherCache.get(cityName.toLowerCase()); // Return cached data
+	}
+	
+	try {
+		// const currentWeatherFetch = fetch(
+		// 	`${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`,
+		// );
+		// const forecastFetch = fetch(
+		// 	`${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`,
+		// );
+		const weatherResponse = await fetch(
+			`${WEATHER_API_URL}/weather?q=${cityName}&appid=${WEATHER_API_KEY}&units=metric`,
+		);
+		const forcastResponse = await fetch(
+			`${WEATHER_API_URL}/forecast?q=${cityName}&appid=${WEATHER_API_KEY}&units=metric`,
+		);
+
+		const weatherData = await weatherResponse.json();
+		const forcastData = await forcastResponse.json();
+
+		// Cache the response for future requests
+		weatherCache.set(cityName.toLowerCase(), { weatherData, forcastData });
+
+		return { weatherData, forcastData };
+
+	} catch (error) {
+		console.error('Failed to fetch weather:', error);
+		return null;
+	}
+}

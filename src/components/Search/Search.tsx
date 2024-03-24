@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { ActionMeta, CSSObjectWithLabel } from 'react-select';
 import {
-	WEATHER_API_URL,
-	WEATHER_API_KEY,
-	GEO_API_URL,
-	geoApiOptions,
 	getCities,
+    getWeather,
 } from 'api/WeatherService';
+import { CityOption } from 'types/types';
 
-// Custom styles
+// Custom styles for <AsyncPaginate >
 const customStyles = () => {
 	return {
 		control: (
@@ -40,46 +38,20 @@ const customStyles = () => {
 	};
 };
 
-// Define the type for the city option
-interface CityOption {
-	value: string;
-	label: string;
-}
 
 const Search: React.FC = () => {
 	const [search, setSearch] = useState<CityOption | null>(null);
-	const [currentWeather, setCurrentWeather] = useState(null);
-	const [forecast, setForecast] = useState(null);
+	// const [currentWeather, setCurrentWeather] = useState(null);
+	// const [forecast, setForecast] = useState(null);
 
 	const onSearchChange = (searchData: CityOption) => {
-		// const [lat, lon] = searchData.value.split(' ');
-		const [cityName, _] = searchData.label.split(' ');
-
-		// const currentWeatherFetch = fetch(
-		// 	`${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`,
-		// );
-		// const forecastFetch = fetch(
-		// 	`${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`,
-		// );
-        const currentWeatherFetch = fetch(
-			`${WEATHER_API_URL}/weather?q=${cityName}&appid=${WEATHER_API_KEY}&units=metric`,
-		);
-		const forecastFetch = fetch(
-			`${WEATHER_API_URL}/forecast?q=${cityName}&appid=${WEATHER_API_KEY}&units=metric`,
-		);
-
-		Promise.all([currentWeatherFetch, forecastFetch])
-			.then(async (response) => {
-				const weatherResponse = await response[0].json();
-				const forcastResponse = await response[1].json();
-				setCurrentWeather({
-					city: searchData.label,
-					...weatherResponse,
-				});
-				setForecast({ city: searchData.label, ...forcastResponse });
-			})
-			.catch(console.log);
+        updateWeather(searchData)
 	};
+
+    const updateWeather = async (searchData: CityOption) => {
+        const weatherData = await getWeather(searchData)
+        console.log("weatherData2", weatherData)
+    }
 
 	const loadOptions = (inputValue: string) => {
 		return getCities(inputValue)
@@ -113,15 +85,13 @@ const Search: React.FC = () => {
 		newValue: CityOption | null,
 		actionMeta: ActionMeta<CityOption>,
 	) => {
-		console.log('search cha');
 		if (newValue) {
 			setSearch(newValue);
 			console.log('New value: ', newValue);
 			onSearchChange(newValue);
 		}
 	};
-	console.log('forecast', forecast);
-	console.log('currentWeather', currentWeather);
+    
 	return (
 		<AsyncPaginate
 			placeholder="Search for city"
