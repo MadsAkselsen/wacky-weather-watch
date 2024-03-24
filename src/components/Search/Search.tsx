@@ -46,11 +46,12 @@ const Search: React.FC = () => {
 
 	const updateWeather = async (searchData: CityOption) => {
 		const weatherData = await getWeather(searchData);
-        // console.log("Weather data: ", weatherData)
+		console.log("updateWeather")
 		setWeatherData(weatherData);
 	};
 
 	const loadOptions = (inputValue: string) => {
+	console.log("loadOptions")
 		return getCities(inputValue)
 			.then((response) => {
 				return {
@@ -84,7 +85,6 @@ const Search: React.FC = () => {
 	) => {
 		if (newValue) {
 			setSearch(newValue);
-			console.log('New value: ', newValue);
 			onSearchChange(newValue);
 		}
 	};
