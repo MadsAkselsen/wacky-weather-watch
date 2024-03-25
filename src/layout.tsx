@@ -7,6 +7,7 @@ import {
 	Box,
 	useTheme,
 	useMediaQuery,
+	Grid,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Cities from 'pages/Cities';
@@ -18,7 +19,6 @@ import Map from 'pages/map';
 import Settings from 'pages/Settings';
 import ToggleThemeButton from 'components/ToggleThemeButton/ToggleThemeButton';
 import { Link as LinkBase } from '@mui/material';
-
 
 function Layout() {
 	const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -43,8 +43,19 @@ function Layout() {
 							>
 								<MenuIcon />
 							</IconButton>
-							<Search />
-							<ToggleThemeButton />
+							<Box
+								display={'flex'}
+								alignItems={'center'}
+								flexDirection={'row'}
+								justifyContent={'space-between'}
+								width={'100%'}
+								marginLeft={2}
+							>
+								<Search />
+								<Box display={{ xs: 'none', sm: 'block' }}>
+									<ToggleThemeButton />
+								</Box>
+							</Box>
 						</Toolbar>
 					</AppBar>
 					<Drawer
@@ -85,20 +96,26 @@ function Layout() {
 				)}
 				<Box sx={{ flexGrow: 1, overflow: 'auto', maxHeight: '100vh' }}>
 					{/* Ensure content can scroll */}
-					<Box
+					<Grid container spacing={2} sx={{ width: '100%', margin: 0 }} display={{ xs: 'none', md: 'flex' }}>
+						<Grid item xs={12} md={7} lg={8}><Search /></Grid>
+						<Grid item xs={12} md={5} lg={4}><Box marginRight={2}><ToggleThemeButton /></Box></Grid>
+					</Grid>
+					{/* <Box
 						display={{ xs: 'none', md: 'flex' }}
 						marginLeft={2}
 						marginTop={2}
+						width={'100%'}
+						justifyContent={'space-between'}
+						boxSizing={'border-box'}
 					>
 						<Search />
 						<ToggleThemeButton />
-					</Box>
+					</Box> */}
 					<Box
 						// p={3}
 						padding={0}
 						marginRight={2}
 						marginBottom={2}
-						
 						sx={{
 							overflow: 'auto',
 						}}

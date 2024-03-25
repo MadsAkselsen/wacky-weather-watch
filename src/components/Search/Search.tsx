@@ -4,41 +4,72 @@ import { ActionMeta, CSSObjectWithLabel } from 'react-select';
 import { getCities, getWeather } from 'api/WeatherService';
 import { CityOption } from 'types/types';
 import { WeatherContext, WeatherContextType } from 'context/weatherContext';
+import { useThemeContext } from 'context/themeContext';
 
-// Custom styles for <AsyncPaginate >
-const customStyles = () => {
+// Hook for custom styles for <AsyncPaginate >
+const useSelectStyles = () => {
+	const {theme} = useThemeContext();
+
 	return {
-		control: (
-			provided: CSSObjectWithLabel,
-			state: { isFocused: boolean },
-		) => ({
-			...provided,
-			width: '300px',
-			borderRadius: '5px',
-			border: '2px solid #ccc',
-			boxShadow: state.isFocused ? '0 0 0 2px #3699FF' : 'none',
-		}),
-		option: (
-			provided: CSSObjectWithLabel,
-			state: { isFocused: boolean; isSelected: boolean },
-		) => ({
-			...provided,
-
-			backgroundColor: state.isFocused
-				? '#3699FF'
-				: provided.backgroundColor,
-			color: state.isFocused ? 'white' : provided.color,
+		control: (styles: CSSObjectWithLabel) => ({
+			...styles,
+			background: theme.palette.background.paper,
+			borderColor: theme.palette.mode === 'dark' ? 'transparent' : '#ccc',
+			boxShadow: 'none',
+			minHeight: '56px',
+			minWidth: '300px', // Match the width in the screenshot
+			borderRadius: '10px', // Match the border radius in the screenshot
+			'&:hover': {
+			  borderColor: theme.palette.mode === 'dark' ? 'transparent' : '#aaa',
+			},
+		  }),
+		  input: (styles: CSSObjectWithLabel) => ({
+			...styles,
+			color: theme.palette.text.primary,
+		  }),
+		  placeholder: (styles: CSSObjectWithLabel) => ({
+			...styles,
+			color: theme.palette.text.secondary,
+		  }),
+		  singleValue: (styles: CSSObjectWithLabel) => ({
+			...styles,
+			color: theme.palette.text.primary,
+		  }),
+		option: (styles: CSSObjectWithLabel, { isFocused, isSelected }: { isFocused: boolean, isSelected: boolean }) => ({
+			...styles,
+			backgroundColor: isSelected
+				? theme.palette.primary.main
+				: isFocused
+				? theme.palette.action.hover
+				: theme.palette.background.paper,
+			color: isSelected
+				? theme.palette.primary.contrastText
+				: theme.palette.text.primary,
 			':active': {
-				...provided[':active'],
-				// backgroundColor: !state.isSelected ? '#3699FF' : provided[':active'].backgroundColor,
+				...styles[':active'],
+				backgroundColor: isSelected ? theme.palette.primary.main : theme.palette.action.selected,
 			},
 		}),
-	};
+		  menu: (styles: CSSObjectWithLabel) => ({
+			...styles,
+			backgroundColor: theme.palette.background.paper,
+			boxShadow: theme.shadows[2],
+			// You might want to add a border or different styles here
+		  }),
+		  menuList: (styles: CSSObjectWithLabel) => ({
+			...styles,
+			padding: 0,
+			// Any additional styles if needed
+		  }),
+		  // Add other custom styles based on the theme
+		};
 };
 
 const Search: React.FC = () => {
 	const [search, setSearch] = useState<CityOption | null>(null);
 	const { setWeatherData } = useContext(WeatherContext) as WeatherContextType;
+
+	const styles = useSelectStyles();
 
 	const onSearchChange = (searchData: CityOption) => {
 		updateWeather(searchData);
@@ -54,7 +85,6 @@ const Search: React.FC = () => {
 			.then((response) => {
 				return {
 					options: response.data.map((city: any) => {
-						// Consider defining a specific type for city
 						return {
 							value: `${city.latitude} ${city.longitude}`,
 							label: `${city.name}, ${city.countryCode}`,
@@ -65,7 +95,6 @@ const Search: React.FC = () => {
 			.catch((error) => {
 				console.error('Failed to fetch geo locations', error);
 				// Return the user input as a fallback option
-				// You might want to generate a dummy or unique ID for the value
 				return {
 					options: [
 						{
@@ -94,7 +123,7 @@ const Search: React.FC = () => {
 			value={search}
 			onChange={handleOnChange}
 			loadOptions={loadOptions}
-			styles={customStyles()}
+			styles={styles}
 		/>
 	);
 };

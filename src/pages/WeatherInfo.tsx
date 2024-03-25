@@ -19,6 +19,7 @@ function WeatherInfo() {
 									padding: 2,
 									background: 'none',
 								}}
+                                elevation={0}
 							>
 								<CityTemperature />
 							</Paper>
@@ -30,6 +31,7 @@ function WeatherInfo() {
 									borderRadius: 3,
 									padding: 2,
 								}}
+                                elevation={0}
 							>
 								<HourLyForecast />
 							</Paper>
@@ -41,6 +43,7 @@ function WeatherInfo() {
 									borderRadius: 3,
 									padding: 2,
 								}}
+                                elevation={0}
 							>
 								<AirConditions />
 							</Paper>
@@ -56,6 +59,7 @@ function WeatherInfo() {
 							height: '100%',
 							borderRadius: 3,
 						}}
+                        elevation={0}
 					>
 						<DailyForecast />
 					</Paper>
