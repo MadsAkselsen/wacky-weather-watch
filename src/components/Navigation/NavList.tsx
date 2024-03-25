@@ -8,7 +8,7 @@ import LinkEntry from './LinkEntry';
 export default function NavList() {
 	return (
 		<List
-			sx={{ width: '100%', bgcolor: 'background.paper' }}
+			sx={{ width: '100%', height: '100%', borderRadius: 3, bgcolor: 'primary.main' }}
 			component="nav"
 		>
 			<LinkEntry href="/" icon={<WeatherIcon />} text="Weather" />

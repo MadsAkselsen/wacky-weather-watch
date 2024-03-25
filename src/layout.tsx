@@ -70,24 +70,34 @@ function Layout() {
 				{!isMobile && (
 					<Box
 						sx={{
-							border: '1px solid black',
-							height: '100vh',
+							height: '95%',
 							width: '80px',
 						}}
+						marginLeft={2}
+						marginTop={2}
+						marginBottom={2}
+						boxSizing={'border-box'}
 					>
 						<NavList />
 					</Box>
 				)}
-				<Box sx={{ flexGrow: 1, overflow: 'auto', maxHeight: '100vh', }}>
+				<Box sx={{ flexGrow: 1, overflow: 'auto', maxHeight: '100vh' }}>
 					{' '}
 					{/* Ensure content can scroll */}
-					<Box display={{ xs: 'none', md: 'block' }}>
+					<Box
+						display={{ xs: 'none', md: 'block' }}
+						marginLeft={2}
+						marginTop={2}
+					>
 						<Search />
 					</Box>
 					<Box
-						p={3}
+						// p={3}
+						padding={0}
+						marginRight={2}
+						marginBottom={2}
+						
 						sx={{
-							border: '1px solid black',
 							overflow: 'auto',
 						}}
 					>

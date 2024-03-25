@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { Grid, Paper, Typography } from '@mui/material';
+import { Grid, Box, Typography } from '@mui/material';
 
 import { WeatherContext, WeatherContextType } from 'context/weatherContext';
 import { formatDate } from 'utils/formatDate';
 
-const WeekForecast = () => {
+const DailyForecast = () => {
 	const { weatherData } = useContext(WeatherContext) as WeatherContextType;
 
 	if (!weatherData) {
@@ -17,13 +17,13 @@ const WeekForecast = () => {
 	);
 
 	return (
-		<Paper elevation={3} sx={{ padding: 2, backgroundColor: '#1E213A' }}>
+		<Box sx={{ padding: 2, backgroundColor: '#1E213A', borderRadius: 3, }}>
 			<Typography
 				variant="subtitle2"
 				gutterBottom
 				sx={{ color: '#E7E7EB' }}
 			>
-				7-DAY FORECAST
+				5-DAY FORECAST
 			</Typography>
 			<Grid container spacing={2}>
 				{dailyForecast.map((forecast) => {
@@ -31,8 +31,7 @@ const WeekForecast = () => {
 					const formattedDate = formatDate(date);
 					return (
 						<Grid item xs={12} key={forecast.dt}>
-							<Paper
-								elevation={3}
+							<Box
 								sx={{
 									padding: 2,
 									display: 'flex',
@@ -60,13 +59,13 @@ const WeekForecast = () => {
 								<Typography variant="body2" sx={{ flex: 1 }}>
 									{forecast.weather[0].main}
 								</Typography>
-							</Paper>
+							</Box>
 						</Grid>
 					);
 				})}
 			</Grid>
-		</Paper>
+		</Box>
 	);
 };
 
-export default WeekForecast;
+export default DailyForecast;
