@@ -8,6 +8,7 @@ import {
 	useTheme,
 	useMediaQuery,
 	Grid,
+	Container,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Cities from 'pages/Cities';
@@ -96,21 +97,24 @@ function Layout() {
 				)}
 				<Box sx={{ flexGrow: 1, overflow: 'auto', maxHeight: '100vh' }}>
 					{/* Ensure content can scroll */}
-					<Grid container spacing={2} sx={{ width: '100%', margin: 0 }} display={{ xs: 'none', md: 'flex' }}>
-						<Grid item xs={12} md={7} lg={8}><Search /></Grid>
-						<Grid item xs={12} md={5} lg={4}><Box marginRight={2}><ToggleThemeButton /></Box></Grid>
-					</Grid>
-					{/* <Box
-						display={{ xs: 'none', md: 'flex' }}
-						marginLeft={2}
-						marginTop={2}
-						width={'100%'}
-						justifyContent={'space-between'}
-						boxSizing={'border-box'}
-					>
-						<Search />
-						<ToggleThemeButton />
-					</Box> */}
+					<Container maxWidth="xl" disableGutters>
+						<Grid
+							container
+							spacing={2}
+							sx={{ width: '100%', margin: 0 }}
+							display={{ xs: 'none', md: 'flex' }}
+						>
+							<Grid item xs={12} md={7} lg={8}>
+								<Search />
+							</Grid>
+							<Grid item xs={12} md={5} lg={4}>
+								<Box marginRight={2}>
+									<ToggleThemeButton />
+								</Box>
+							</Grid>
+						</Grid>
+					</Container>
+
 					<Box
 						// p={3}
 						padding={0}
