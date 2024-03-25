@@ -13,13 +13,12 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import Cities from 'pages/Cities';
 import WeatherInfo from 'pages/WeatherInfo';
-import { Routes, Route, MemoryRouter } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import NavList from 'components/Navigation/NavList';
 import Search from 'components/Search/Search';
 import Map from 'pages/map';
 import Settings from 'pages/Settings';
 import ToggleThemeButton from 'components/ToggleThemeButton/ToggleThemeButton';
-import { Link as LinkBase } from '@mui/material';
 
 function Layout() {
 	const [mobileOpen, setMobileOpen] = React.useState(false);

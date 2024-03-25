@@ -28,33 +28,50 @@ const lightTheme = createTheme({
 	palette: {
 	  mode: 'light',
 	  primary: {
-		main: '#1976d2', // Example primary color
+		main: '#FFA726', // Soft orange for primary actions and accents
 	  },
 	  secondary: {
-		main: '#dc004e', // Example secondary color
+		main: '#64B5F6', // Light blue for less prominent elements, secondary actions
 	  },
 	  background: {
-		default: '#f0f2f5', // Light gray background
-		paper: '#ffffff', // For components like Card, Paper etc.
+		default: '#F0F0F0', // Light grey for main background
+		paper: '#FFFFFF', // Pure white for components like Card, Paper, etc.
 	  },
 	  text: {
-		primary: '#000000', // Black for primary text in light mode
-		secondary: '#555555', // A darker gray for secondary text in light mode
+		primary: '#202020', // Dark grey for primary text for better readability
+		secondary: '#575757', // Lighter grey for secondary text
 	  },
-	  // other customizations...
+	  divider: '#E0E0E0', // Light grey for dividers
+	  // You might need to add custom properties to use for borders and hover states, not native to MUI's theme structure
 	},
 	components: {
-		MuiLink: {
-		  defaultProps: {
-			component: LinkBehavior,
-		  } as LinkProps,
+	  MuiLink: {
+		defaultProps: {
+		  component: LinkBehavior,
+		} as LinkProps,
+	  },
+	  MuiButtonBase: {
+		defaultProps: {
+		  LinkComponent: LinkBehavior,
 		},
-		MuiButtonBase: {
-		  defaultProps: {
-			LinkComponent: LinkBehavior,
+	  },
+	  // Apply divider color to components that use borders/dividers
+	  MuiDivider: {
+		styleOverrides: {
+		  root: {
+			backgroundColor: '#E0E0E0', // Divider color
 		  },
 		},
 	  },
+	  MuiCard: {
+		styleOverrides: {
+		  root: {
+			borderColor: '#D6D6D6', // For card borders if applicable
+		  },
+		},
+	  },
+	  // ...other component overrides
+	},
 	// ...other theme overrides
   });
   

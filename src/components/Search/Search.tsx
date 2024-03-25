@@ -16,9 +16,9 @@ const useSelectStyles = () => {
 			background: theme.palette.background.paper,
 			borderColor: theme.palette.mode === 'dark' ? 'transparent' : '#ccc',
 			boxShadow: 'none',
-			minHeight: '56px',
-			minWidth: '300px', // Match the width in the screenshot
-			borderRadius: '10px', // Match the border radius in the screenshot
+			// height: '98%',
+			minWidth: '300px',
+			borderRadius: '10px',
 			'&:hover': {
 			  borderColor: theme.palette.mode === 'dark' ? 'transparent' : '#aaa',
 			},

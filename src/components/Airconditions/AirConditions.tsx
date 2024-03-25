@@ -19,7 +19,7 @@ const AirConditions = () => {
 			<Typography
 				variant="subtitle2"
 				gutterBottom
-				sx={{ color: '#E7E7EB' }}
+				fontSize={{ xs: '0.7rem', sm: '0.7rem' }}
 			>
 				AIR CONDITIONS
 			</Typography>

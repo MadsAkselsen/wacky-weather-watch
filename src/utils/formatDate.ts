@@ -1,11 +1,13 @@
 export function formatDate(date: Date): string {
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    
-    const dayOfWeek = days[date.getDay()];
-    const month = months[date.getMonth()];
-    const dayOfMonth = date.getDate().toString().padStart(2, '0');
-  
-    return `${dayOfWeek}, ${month} ${dayOfMonth}`;
-  }
-  
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  // Create a new date for comparison
+  const today = new Date();
+
+  // Compare the date passed to the function to today's date
+  const dayOfWeek = date.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)
+    ? 'Today'
+    : days[date.getDay()];
+
+  return dayOfWeek;
+}

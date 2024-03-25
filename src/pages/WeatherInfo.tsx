@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Paper } from '@mui/material';
+import { Container, Grid, Paper } from '@mui/material';
 import AirConditions from 'components/Airconditions/AirConditions';
 import CityTemperature from 'components/CityTemperature/CityTemperature';
 import HourLyForecast from 'components/TodayForecast/HourlyForeacst';
@@ -55,7 +55,6 @@ function WeatherInfo() {
 				<Grid item xs={12} md={5} lg={4}>
 					<Paper
 						sx={{
-							textAlign: 'center',
 							height: '100%',
 							borderRadius: 3,
 						}}

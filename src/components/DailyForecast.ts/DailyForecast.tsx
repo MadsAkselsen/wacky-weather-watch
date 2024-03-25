@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Grid, Box, Typography, Paper } from '@mui/material';
+import { useContext } from 'react';
+import { Grid, Box, Typography, Divider } from '@mui/material';
 
 import { WeatherContext, WeatherContextType } from 'context/weatherContext';
 import { formatDate } from 'utils/formatDate';
@@ -20,12 +20,12 @@ const DailyForecast = () => {
 			<Typography
 				variant="subtitle2"
 				gutterBottom
-				sx={{ color: '#E7E7EB' }}
+				fontSize={{ xs: '0.7rem', sm: '0.7rem' }}
 			>
 				5-DAY FORECAST
 			</Typography>
-			<Grid container spacing={2}>
-				{dailyForecast.map((forecast) => {
+			<Grid container spacing={2} >
+				{dailyForecast.map((forecast, index) => {
 					const date = new Date(forecast.dt * 1000);
 					const formattedDate = formatDate(date);
 					return (
@@ -36,7 +36,9 @@ const DailyForecast = () => {
 									display: 'flex',
 									alignItems: 'center', // Centers items vertically within the card
 									justifyContent: 'space-between', // Spreads out items horizontally
+									textAlign: 'center',
 								}}
+								
 							>
 								<Typography
 									variant="subtitle2"
@@ -57,6 +59,7 @@ const DailyForecast = () => {
 									{forecast.weather[0].main}
 								</Typography>
 							</Box>
+							{index !== dailyForecast.length - 1 && <Divider sx={{ bgcolor: 'grey.900' }} />}
 						</Grid>
 					);
 				})}
