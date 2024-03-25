@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { WeatherContext, WeatherContextType } from 'context/weatherContext';
-import { Typography, Paper, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 interface CityInfoProps {
 	transparent?: boolean;
@@ -20,16 +20,13 @@ const CityInfo: React.FC<CityInfoProps> = ({ transparent = true }) => {
 		: 'default background color here';
 
 	return (
-		<Paper
+		<Box
 			style={{
 				backgroundColor,
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'space-between',
-                
-                // height: '200px',
 			}}
-			elevation={transparent ? 0 : 3}
 		>
 			<Box
 				display="flex" flexDirection="column"  justifyContent={'space-between'} height={'100%'} gap={6}
@@ -56,7 +53,7 @@ const CityInfo: React.FC<CityInfoProps> = ({ transparent = true }) => {
 				alt={todayForecast.weather[0].description}
 				style={{ width: '200px', flex: 'none' }}
 			/>
-		</Paper>
+		</Box>
 	);
 };
 

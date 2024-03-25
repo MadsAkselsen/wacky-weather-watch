@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-	Grid,
 	AppBar,
 	Toolbar,
 	IconButton,
@@ -12,12 +11,14 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import Cities from 'pages/Cities';
 import WeatherInfo from 'pages/WeatherInfo';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, MemoryRouter } from 'react-router-dom';
 import NavList from 'components/Navigation/NavList';
 import Search from 'components/Search/Search';
 import Map from 'pages/map';
 import Settings from 'pages/Settings';
-import { Link } from 'react-router-dom';
+import ToggleThemeButton from 'components/ToggleThemeButton/ToggleThemeButton';
+import { Link as LinkBase } from '@mui/material';
+
 
 function Layout() {
 	const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -43,6 +44,7 @@ function Layout() {
 								<MenuIcon />
 							</IconButton>
 							<Search />
+							<ToggleThemeButton />
 						</Toolbar>
 					</AppBar>
 					<Drawer
@@ -82,14 +84,14 @@ function Layout() {
 					</Box>
 				)}
 				<Box sx={{ flexGrow: 1, overflow: 'auto', maxHeight: '100vh' }}>
-					{' '}
 					{/* Ensure content can scroll */}
 					<Box
-						display={{ xs: 'none', md: 'block' }}
+						display={{ xs: 'none', md: 'flex' }}
 						marginLeft={2}
 						marginTop={2}
 					>
 						<Search />
+						<ToggleThemeButton />
 					</Box>
 					<Box
 						// p={3}

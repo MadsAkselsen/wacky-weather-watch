@@ -1,14 +1,14 @@
-import { WeatherContextProvider } from 'context/weatherContext';
 import Layout from 'layout';
 import { BrowserRouter as Router } from 'react-router-dom';
+import ContextProvider from 'context/ContextProvider';
 
 function App() {
 	return (
-		<Router>
-			<WeatherContextProvider>
+		<ContextProvider>
+			<Router>
 				<Layout />
-			</WeatherContextProvider>
-		</Router>
+			</Router>
+		</ContextProvider>
 	);
 }
 

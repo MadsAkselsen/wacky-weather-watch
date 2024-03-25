@@ -2,7 +2,9 @@ import * as React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Link } from 'react-router-dom';
+import { useThemeContext } from 'context/themeContext';
+import Link from '@mui/material/Link';
+
 
 // LinkEntry component
 interface LinkEntryProps {
@@ -12,8 +14,10 @@ interface LinkEntryProps {
 }
 
 export default function LinkEntry({ href, icon, text }: LinkEntryProps) {
+  const theme = useThemeContext();
+
     return (
-      <Link to={href} style={{ textDecoration: 'none', color: 'black' }} >
+      <Link href={href} style={{ textDecoration: 'none' }} >
         <ListItemButton dense={true} sx={{ flexDirection: 'column' }}>
           <ListItemIcon sx={{ justifyContent: 'center' }}>
             {icon}

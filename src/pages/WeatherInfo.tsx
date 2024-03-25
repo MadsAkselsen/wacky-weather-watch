@@ -13,53 +13,41 @@ function WeatherInfo() {
 					<Grid container spacing={2}>
 						{/* Top Box - Today's Forecast */}
 						<Grid item xs={12}>
-							<Box sx={{
+							<Paper sx={{
 									borderRadius: 3,
                   padding: 2,
-									bgcolor: 'primary.main',
-									'&:hover': {
-										bgcolor: 'primary.dark',
-									},
 								}}>
 								<CityTemperature />
-							</Box>
+							</Paper>
 						</Grid>
-						{/* Middle Box - Air Conditions */}
+						{/* Middle Paper - Air Conditions */}
 						<Grid item xs={12}>
-							<Box
+							<Paper
 								sx={{
 									borderRadius: 3,
                   padding: 2,
-									bgcolor: 'primary.main',
-									'&:hover': {
-										bgcolor: 'primary.dark',
-									},
 								}}
 							>
 								<HourLyForecast />
-							</Box>
+							</Paper>
 						</Grid>
-						{/* Bottom Box - See More */}
+						{/* Bottom Paper - See More */}
 						<Grid item xs={12}>
-							<Box sx={{
+							<Paper sx={{
 									borderRadius: 3,
                   padding: 2,
-									bgcolor: 'primary.main',
-									'&:hover': {
-										bgcolor: 'primary.dark',
-									},
 								}}>
 								<AirConditions />
-							</Box>
+							</Paper>
 						</Grid>
 					</Grid>
 				</Grid>
 
 				{/* Right Column - Forecast */}
 				<Grid item xs={12} md={5} lg={4}>
-					<Box style={{ textAlign: 'center', height: '100%' }}>
+					<Paper style={{ textAlign: 'center', height: '100%' }}>
 						<DailyForecast />
-					</Box>
+					</Paper>
 				</Grid>
 			</Grid>
 		</Container>

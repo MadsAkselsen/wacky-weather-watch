@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Grid, Box, Typography } from '@mui/material';
+import { Grid, Box, Typography, Paper } from '@mui/material';
 
 import { WeatherContext, WeatherContextType } from 'context/weatherContext';
 import { formatDate } from 'utils/formatDate';
@@ -10,14 +10,13 @@ const DailyForecast = () => {
 	if (!weatherData) {
 		return null;
 	}
-
-    console.log("weatherData.forecastData.list", weatherData.forecastData.list);
+	
 	const dailyForecast = weatherData.forecastData.list.filter(
 		(item, index) => index % 8 === 4,
 	);
 
 	return (
-		<Box sx={{ padding: 2, backgroundColor: '#1E213A', borderRadius: 3, }}>
+		<Paper sx={{ padding: 2, borderRadius: 3, }}>
 			<Typography
 				variant="subtitle2"
 				gutterBottom
@@ -37,8 +36,6 @@ const DailyForecast = () => {
 									display: 'flex',
 									alignItems: 'center', // Centers items vertically within the card
 									justifyContent: 'space-between', // Spreads out items horizontally
-									backgroundColor: '#1E213A',
-									color: '#E7E7EB',
 								}}
 							>
 								<Typography
@@ -64,7 +61,7 @@ const DailyForecast = () => {
 					);
 				})}
 			</Grid>
-		</Box>
+		</Paper>
 	);
 };
 

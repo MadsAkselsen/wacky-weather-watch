@@ -4,11 +4,13 @@ import CitiesIcon from '@mui/icons-material/LocationCity';
 import MapIcon from '@mui/icons-material/Map';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LinkEntry from './LinkEntry';
+import { Paper } from '@mui/material';
 
 export default function NavList() {
 	return (
-		<List
-			sx={{ width: '100%', height: '100%', borderRadius: 3, bgcolor: 'primary.main' }}
+		<Paper sx={{ width: '100%', height: '100%', borderRadius: 3 }}>
+			<List
+			
 			component="nav"
 		>
 			<LinkEntry href="/" icon={<WeatherIcon />} text="Weather" />
@@ -20,5 +22,6 @@ export default function NavList() {
 				text="Settings"
 			/>
 		</List>
+		</Paper>
 	);
 }
