@@ -10,13 +10,13 @@ const DailyForecast = () => {
 	if (!weatherData) {
 		return null;
 	}
-	
+
 	const dailyForecast = weatherData.forecastData.list.filter(
 		(item, index) => index % 8 === 4,
 	);
 
 	return (
-		<Paper sx={{ padding: 2, borderRadius: 3, }}>
+		<Box sx={{ padding: 2, borderRadius: 3 }}>
 			<Typography
 				variant="subtitle2"
 				gutterBottom
@@ -61,7 +61,7 @@ const DailyForecast = () => {
 					);
 				})}
 			</Grid>
-		</Paper>
+		</Box>
 	);
 };
 

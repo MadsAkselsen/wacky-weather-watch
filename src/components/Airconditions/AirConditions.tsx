@@ -15,45 +15,53 @@ const AirConditions = () => {
 	const uvIndex = 3; // Assuming a static value for UV Index as it's not provided in the data
 
 	return (
-		<Grid container spacing={2}
-		>
-			<Grid item xs={6}>
-				<Box>
-					<Typography variant="subtitle2" component="p">
-						Real Feel
-					</Typography>
-					<Typography variant="h6" component="span">
-						{Math.round(feels_like)}°
-					</Typography>
-				</Box>
-				<Box>
-					<Typography variant="subtitle2" component="p">
-						Wind
-					</Typography>
-					<Typography variant="h6" component="span">
-						{speed} km/h
-					</Typography>
-				</Box>
+		<Box>
+			<Typography
+				variant="subtitle2"
+				gutterBottom
+				sx={{ color: '#E7E7EB' }}
+			>
+				AIR CONDITIONS
+			</Typography>
+			<Grid container spacing={2}>
+				<Grid item xs={6}>
+					<Box>
+						<Typography variant="subtitle2" component="p">
+							Real Feel
+						</Typography>
+						<Typography variant="h6" component="span">
+							{Math.round(feels_like)}°
+						</Typography>
+					</Box>
+					<Box>
+						<Typography variant="subtitle2" component="p">
+							Wind
+						</Typography>
+						<Typography variant="h6" component="span">
+							{speed} km/h
+						</Typography>
+					</Box>
+				</Grid>
+				<Grid item xs={6}>
+					<Box>
+						<Typography variant="subtitle2" component="p">
+							Chance of rain
+						</Typography>
+						<Typography variant="h6" component="span">
+							{humidity}%
+						</Typography>
+					</Box>
+					<Box>
+						<Typography variant="subtitle2" component="p">
+							UV Index
+						</Typography>
+						<Typography variant="h6" component="span">
+							{uvIndex}
+						</Typography>
+					</Box>
+				</Grid>
 			</Grid>
-			<Grid item xs={6}>
-				<Box>
-					<Typography variant="subtitle2" component="p">
-						Chance of rain
-					</Typography>
-					<Typography variant="h6" component="span">
-						{humidity}%
-					</Typography>
-				</Box>
-				<Box>
-					<Typography variant="subtitle2" component="p">
-						UV Index
-					</Typography>
-					<Typography variant="h6" component="span">
-						{uvIndex}
-					</Typography>
-				</Box>
-			</Grid>
-		</Grid>
+		</Box>
 	);
 };
 

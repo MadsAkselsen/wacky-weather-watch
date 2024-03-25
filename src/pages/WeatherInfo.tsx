@@ -13,30 +13,35 @@ function WeatherInfo() {
 					<Grid container spacing={2}>
 						{/* Top Box - Today's Forecast */}
 						<Grid item xs={12}>
-							<Paper sx={{
+							<Paper
+								sx={{
 									borderRadius: 3,
-                  padding: 2,
-								}}>
+									padding: 2,
+									background: 'none',
+								}}
+							>
 								<CityTemperature />
 							</Paper>
 						</Grid>
-						{/* Middle Paper - Air Conditions */}
+						{/* Middle Paper - Hourly Forecast */}
 						<Grid item xs={12}>
 							<Paper
 								sx={{
 									borderRadius: 3,
-                  padding: 2,
+									padding: 2,
 								}}
 							>
 								<HourLyForecast />
 							</Paper>
 						</Grid>
-						{/* Bottom Paper - See More */}
+						{/* Bottom Paper - Other */}
 						<Grid item xs={12}>
-							<Paper sx={{
+							<Paper
+								sx={{
 									borderRadius: 3,
-                  padding: 2,
-								}}>
+									padding: 2,
+								}}
+							>
 								<AirConditions />
 							</Paper>
 						</Grid>
@@ -45,7 +50,13 @@ function WeatherInfo() {
 
 				{/* Right Column - Forecast */}
 				<Grid item xs={12} md={5} lg={4}>
-					<Paper style={{ textAlign: 'center', height: '100%' }}>
+					<Paper
+						sx={{
+							textAlign: 'center',
+							height: '100%',
+							borderRadius: 3,
+						}}
+					>
 						<DailyForecast />
 					</Paper>
 				</Grid>

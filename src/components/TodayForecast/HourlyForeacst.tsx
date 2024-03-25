@@ -1,6 +1,6 @@
 // HourlyForecast.tsx
 import React, { useContext } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import HourlyEntry from './HourlyEntry';
 import { WeatherContext, WeatherContextType } from 'context/weatherContext';
 
@@ -15,7 +15,16 @@ const HourlyForecast = () => {
   const hourlyData = weatherData.forecastData.list.slice(0, 6);
 
   return (
-    <Box display="flex" justifyContent="space-around" flexWrap="wrap">
+    <Box>
+      <Typography
+				variant="subtitle2"
+				gutterBottom
+				sx={{ color: '#E7E7EB' }}
+			>
+				TODAY'S FORECAST
+			</Typography>
+      <Box display="flex" justifyContent="space-around" flexWrap="wrap">
+      		
       {hourlyData.map((forecast) => (
         <HourlyEntry
           key={forecast.dt}
@@ -25,6 +34,8 @@ const HourlyForecast = () => {
         />
       ))}
     </Box>
+    </Box>
+    
   );
 };
 
