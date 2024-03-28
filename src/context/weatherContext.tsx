@@ -21,7 +21,7 @@ export const WeatherContextProvider: React.FC<{children: React.ReactNode}> = ({ 
     );
 };
 
-export const useAppContext = (): WeatherContextType => {
+export const useWeatherContext = (): WeatherContextType => {
     const context = useContext(WeatherContext);
     if (!context) {
         throw new Error('useAppContext must be used within an AppContextProvider');

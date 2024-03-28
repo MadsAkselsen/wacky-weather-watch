@@ -1,10 +1,9 @@
 // AirConditions.tsx
-import { useContext } from 'react';
 import { Box, Typography, Grid } from '@mui/material';
-import { WeatherContext, WeatherContextType } from 'context/weatherContext';
+import { useWeatherContext } from 'context/weatherContext';
 
 const AirConditions = () => {
-	const { weatherData } = useContext(WeatherContext) as WeatherContextType;
+	const { weatherData } = useWeatherContext();
 
 	if (!weatherData) {
 		return null;

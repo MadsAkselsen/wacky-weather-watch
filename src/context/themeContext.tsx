@@ -42,7 +42,7 @@ const lightTheme = createTheme({
 		secondary: '#575757', // Lighter grey for secondary text
 	  },
 	  divider: '#E0E0E0', // Light grey for dividers
-	  // You might need to add custom properties to use for borders and hover states, not native to MUI's theme structure
+	  // Might need to add custom properties to use for borders and hover states, not native to MUI's theme structure
 	},
 	components: {
 	  MuiLink: {
@@ -86,7 +86,7 @@ const lightTheme = createTheme({
 		main: '#f48fb1', // Example secondary color for dark mode
 	  },
 	  background: {
-		default: '#0e0e0e', // Darker background for dark mode
+		default: '#0b131d', // Darker background for dark mode
 		paper: '#1f2c3b', // Darker paper components background
 		
 	  },

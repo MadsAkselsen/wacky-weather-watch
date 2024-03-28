@@ -30,7 +30,7 @@ const HourlyForecast = () => {
 				flexWrap="wrap"
 			>
 				{hourlyData.map((forecast, index) => (
-					<>
+					<Box key={index}>
 						{index !== 0 && (
 							<Divider
 								orientation="vertical"
@@ -49,7 +49,7 @@ const HourlyForecast = () => {
 							iconUrl={`http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`}
 							temperature={forecast.main.temp}
 						/>
-					</>
+					</Box>
 				))}
 			</Box>
 		</>

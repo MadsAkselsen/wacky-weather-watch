@@ -19,9 +19,11 @@ import Search from 'components/Search/Search';
 import Map from 'pages/map';
 import Settings from 'pages/Settings';
 import ToggleThemeButton from 'components/ToggleThemeButton/ToggleThemeButton';
+import CurrentPositionBtn from 'components/CurrentPositionBtn/CurrentPositionBtn';
+import { useUIContext } from 'context/uiContextProvider';
 
 function Layout() {
-	const [mobileOpen, setMobileOpen] = React.useState(false);
+	const { mobileOpen, setMobileOpen } = useUIContext();
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -51,7 +53,10 @@ function Layout() {
 								width={'100%'}
 								marginLeft={2}
 							>
-								<Search />
+								<Box display={'flex'}>
+									<Search />
+									<CurrentPositionBtn />
+								</Box>
 								<Box display={{ xs: 'none', sm: 'block' }}>
 									<ToggleThemeButton />
 								</Box>
@@ -61,12 +66,14 @@ function Layout() {
 					<Drawer
 						variant="temporary"
 						open={mobileOpen}
-						onClose={handleDrawerToggle}
-						ModalProps={{
-							keepMounted: true,
-						}}
+						onClose={() => setMobileOpen(false)}
+						ModalProps={
+							{
+								// keepMounted: true,
+							}
+						}
 					>
-						<Box p={2}>
+						<Box p={{ xs: '', sm: 'sm' }} width={'100vw'}>
 							<NavList />
 						</Box>
 					</Drawer>
@@ -107,7 +114,12 @@ function Layout() {
 								<Search />
 							</Grid>
 							<Grid item xs={12} md={5} lg={4}>
-								<Box marginRight={2}>
+								<Box
+									marginRight={2}
+									display={'flex'}
+									justifyContent={'space-between'}
+								>
+									<CurrentPositionBtn />
 									<ToggleThemeButton />
 								</Box>
 							</Grid>

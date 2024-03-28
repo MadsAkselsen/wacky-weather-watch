@@ -1,5 +1,6 @@
 import { WeatherContextProvider } from './weatherContext';
 import { ThemeContextProvider } from './themeContext';
+import { UIContextProvider } from './uiContextProvider';
 
 const ContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
@@ -7,7 +8,7 @@ const ContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	return (
 		<WeatherContextProvider>
 			<ThemeContextProvider>
-							{children}
+				<UIContextProvider>{children}</UIContextProvider>
 			</ThemeContextProvider>
 		</WeatherContextProvider>
 	);

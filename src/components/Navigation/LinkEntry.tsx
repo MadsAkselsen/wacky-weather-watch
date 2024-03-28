@@ -14,8 +14,8 @@ interface LinkEntryProps {
 
 export default function LinkEntry({ href, icon, text }: LinkEntryProps) {
     return (
-      <Link href={href} style={{ textDecoration: 'none' }} >
-        <ListItemButton dense={true} sx={{ flexDirection: 'column' }}>
+      <Link href={href} sx={{ textDecoration: 'none' }}>
+        <ListItemButton dense={true} sx={{ flexDirection: 'column', marginTop: { xs: '20px', md: '10px' } }}>
           <ListItemIcon sx={{ justifyContent: 'center' }}>
             {icon}
           </ListItemIcon>

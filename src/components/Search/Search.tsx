@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { ActionMeta, CSSObjectWithLabel } from 'react-select';
-import { getCities, getWeather } from 'api/WeatherService';
+import { getCities, getWeatherByCity } from 'api/WeatherService';
 import { CityOption } from 'types/types';
-import { WeatherContext, WeatherContextType } from 'context/weatherContext';
+import { useWeatherContext } from 'context/weatherContext';
 import { useThemeContext } from 'context/themeContext';
 
 // Hook for custom styles for <AsyncPaginate >
@@ -17,7 +17,7 @@ const useSelectStyles = () => {
 			borderColor: theme.palette.mode === 'dark' ? 'transparent' : '#ccc',
 			boxShadow: 'none',
 			// height: '98%',
-			minWidth: '300px',
+			minWidth: '270px',
 			borderRadius: '10px',
 			'&:hover': {
 			  borderColor: theme.palette.mode === 'dark' ? 'transparent' : '#aaa',
@@ -67,7 +67,7 @@ const useSelectStyles = () => {
 
 const Search: React.FC = () => {
 	const [search, setSearch] = useState<CityOption | null>(null);
-	const { setWeatherData } = useContext(WeatherContext) as WeatherContextType;
+	const { setWeatherData } = useWeatherContext();
 
 	const styles = useSelectStyles();
 
@@ -76,7 +76,7 @@ const Search: React.FC = () => {
 	};
 
 	const updateWeather = async (searchData: CityOption) => {
-		const weatherData = await getWeather(searchData);
+		const weatherData = await getWeatherByCity(searchData);
 		setWeatherData(weatherData);
 	};
 

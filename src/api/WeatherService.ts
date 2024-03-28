@@ -47,7 +47,7 @@ export const getCities = async (inputValue: string) => {
 	}
 };
 
-export const getWeather = async (searchData: CityOption) => {
+export const getWeatherByCity = async (searchData: CityOption) => {
 	// Use mock data if the environment variable is set to save API calls
 	if (process.env.REACT_APP_USE_MOCK_DATA) {
 		return WeatherAndForecastMockData;
@@ -62,12 +62,6 @@ export const getWeather = async (searchData: CityOption) => {
 	}
 
 	try {
-		// const currentWeatherFetch = fetch(
-		// 	`${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`,
-		// );
-		// const forecastFetch = fetch(
-		// 	`${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`,
-		// );
 		const weatherResponse = await fetch(
 			`${WEATHER_API_URL}/weather?q=${cityName}&appid=${WEATHER_API_KEY}&units=metric`,
 		);
@@ -80,6 +74,40 @@ export const getWeather = async (searchData: CityOption) => {
 
 		// Cache the response for future requests
 		weatherCache.set(cityName.toLowerCase(), { weatherData, forecastData });
+
+		return { weatherData, forecastData };
+	} catch (error) {
+		console.error('Failed to fetch weather:', error);
+		return null;
+	}
+};
+
+export const getWeatherByCoords = async (lat: number, lon: number) => {
+	console.log("getWeatherByCoords", lat, lon);
+	// Use mock data if the environment variable is set to save API calls
+	if (process.env.REACT_APP_USE_MOCK_DATA) {
+		return WeatherAndForecastMockData;
+	}
+
+	// Check if the response for the inputValue is already in the cache
+	if (weatherCache.has(`${lat+lon}`)) {
+		console.log('Returning cached data for:', `${lat+lon}`);
+		return weatherCache.get(`${lat+lon}`); // Return cached data
+	}
+
+	try {
+		const weatherResponse = await fetch(
+			`${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`,
+		);
+		const forcastResponse = await fetch(
+			`${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`,
+		);
+
+		const weatherData = await weatherResponse.json();
+		const forecastData = await forcastResponse.json();
+
+		// Cache the response for future requests
+		weatherCache.set(`${lat+lon}`, { weatherData, forecastData });
 
 		return { weatherData, forecastData };
 	} catch (error) {
