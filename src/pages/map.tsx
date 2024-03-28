@@ -1,11 +1,12 @@
+import { Container } from '@mui/material';
+import MapComponent from 'components/Map/Map';
 import React from 'react';
 
 const Map: React.FC = () => {
 	return (
-		<div>
-			<h1>Map Page</h1>
-			<p>Welcome to the Map page!</p>
-		</div>
+		<Container maxWidth="xl" disableGutters sx={{ height: '80vh' }}>
+			<MapComponent />
+		</Container>
 	);
 };
 
