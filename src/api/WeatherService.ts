@@ -53,7 +53,7 @@ export const getWeatherByCity = async (searchData: CityOption) => {
 		return WeatherAndForecastMockData;
 	}
 	// const [lat, lon] = searchData.value.split(' ');
-	const [cityName, _] = searchData.label.split(' ');
+	const [cityName] = searchData.label.split(' ');
 
 	// Check if the response for the inputValue is already in the cache
 	if (weatherCache.has(cityName.toLowerCase())) {

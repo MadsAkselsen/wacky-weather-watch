@@ -4,7 +4,7 @@ import CitiesIcon from '@mui/icons-material/LocationCity';
 import MapIcon from '@mui/icons-material/Map';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LinkEntry from './LinkEntry';
-import { Box, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
 import { useUIContext } from 'context/uiContextProvider';
 
 export default function NavList() {
