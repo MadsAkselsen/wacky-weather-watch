@@ -8,7 +8,7 @@ import { useThemeContext } from 'context/themeContext';
 
 // Hook for custom styles for <AsyncPaginate >
 const useSelectStyles = () => {
-	const {theme} = useThemeContext();
+	const { theme } = useThemeContext();
 
 	return {
 		control: (styles: CSSObjectWithLabel) => ({
@@ -20,49 +20,58 @@ const useSelectStyles = () => {
 			minWidth: '270px',
 			borderRadius: '10px',
 			'&:hover': {
-			  borderColor: theme.palette.mode === 'dark' ? 'transparent' : '#aaa',
+				borderColor:
+					theme.palette.mode === 'dark' ? 'transparent' : '#aaa',
 			},
-		  }),
-		  input: (styles: CSSObjectWithLabel) => ({
+		}),
+		input: (styles: CSSObjectWithLabel) => ({
 			...styles,
 			color: theme.palette.text.primary,
-		  }),
-		  placeholder: (styles: CSSObjectWithLabel) => ({
+		}),
+		placeholder: (styles: CSSObjectWithLabel) => ({
 			...styles,
 			color: theme.palette.text.secondary,
-		  }),
-		  singleValue: (styles: CSSObjectWithLabel) => ({
+		}),
+		singleValue: (styles: CSSObjectWithLabel) => ({
 			...styles,
 			color: theme.palette.text.primary,
-		  }),
-		option: (styles: CSSObjectWithLabel, { isFocused, isSelected }: { isFocused: boolean, isSelected: boolean }) => ({
+		}),
+		option: (
+			styles: CSSObjectWithLabel,
+			{
+				isFocused,
+				isSelected,
+			}: { isFocused: boolean; isSelected: boolean },
+		) => ({
 			...styles,
 			backgroundColor: isSelected
 				? theme.palette.primary.main
 				: isFocused
-				? theme.palette.action.hover
-				: theme.palette.background.paper,
+					? theme.palette.action.hover
+					: theme.palette.background.paper,
 			color: isSelected
 				? theme.palette.primary.contrastText
 				: theme.palette.text.primary,
 			':active': {
 				...styles[':active'],
-				backgroundColor: isSelected ? theme.palette.primary.main : theme.palette.action.selected,
+				backgroundColor: isSelected
+					? theme.palette.primary.main
+					: theme.palette.action.selected,
 			},
 		}),
-		  menu: (styles: CSSObjectWithLabel) => ({
+		menu: (styles: CSSObjectWithLabel) => ({
 			...styles,
 			backgroundColor: theme.palette.background.paper,
 			boxShadow: theme.shadows[2],
 			// You might want to add a border or different styles here
-		  }),
-		  menuList: (styles: CSSObjectWithLabel) => ({
+		}),
+		menuList: (styles: CSSObjectWithLabel) => ({
 			...styles,
 			padding: 0,
 			// Any additional styles if needed
-		  }),
-		  // Add other custom styles based on the theme
-		};
+		}),
+		// Add other custom styles based on the theme
+	};
 };
 
 const Search: React.FC = () => {
@@ -76,6 +85,7 @@ const Search: React.FC = () => {
 	};
 
 	const updateWeather = async (searchData: CityOption) => {
+		console.log("=>>>>> udpate weather", searchData)
 		const weatherData = await getWeatherByCity(searchData);
 		setWeatherData(weatherData);
 	};
