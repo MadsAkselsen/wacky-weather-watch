@@ -1,0 +1,42 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Main Branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build React Application
+        run: npm run build
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: "unnecessary"
+ 
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H -p 2354 ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: Transfer with rsync
+        run: rsync -avz --delete -e "ssh -p 2354" ./build/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIRECTORY }}
+
+      - name: Start with PM2
+        run: ssh -p 2354 ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'source /home/mads/.nvm/nvm.sh && cd ${{ secrets.TARGET_DIRECTORY }} && pm2 restart reactapp || pm2 serve . 3000 --spa --name "reactapp"'
