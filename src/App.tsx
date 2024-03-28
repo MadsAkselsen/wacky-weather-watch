@@ -1,4 +1,4 @@
-import Layout from 'layout';
+import Layout from 'layout/layout';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ContextProvider from 'context/ContextProvider';
 

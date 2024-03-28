@@ -1,16 +1,4 @@
-import React from 'react';
-import {
-	AppBar,
-	Toolbar,
-	IconButton,
-	Drawer,
-	Box,
-	useTheme,
-	useMediaQuery,
-	Grid,
-	Container,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Box, useTheme, useMediaQuery, Grid, Container } from '@mui/material';
 import Cities from 'pages/Cities';
 import WeatherInfo from 'pages/WeatherInfo';
 import { Routes, Route } from 'react-router-dom';
@@ -20,63 +8,19 @@ import Map from 'pages/map';
 import Settings from 'pages/Settings';
 import ToggleThemeButton from 'components/ToggleThemeButton/ToggleThemeButton';
 import CurrentPositionBtn from 'components/CurrentPositionBtn/CurrentPositionBtn';
-import { useUIContext } from 'context/uiContextProvider';
+import AppBarCustom from 'components/AppBar/AppBar';
+import NavDrawer from 'components/NavDrawer/NavDrawer';
 
 function Layout() {
-	const { mobileOpen, setMobileOpen } = useUIContext();
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
-	const handleDrawerToggle = () => {
-		setMobileOpen(!mobileOpen);
-	};
 
 	return (
 		<>
 			{isMobile && (
 				<>
-					<AppBar position="static" color="default">
-						<Toolbar>
-							<IconButton
-								color="inherit"
-								aria-label="open drawer"
-								edge="start"
-								onClick={handleDrawerToggle}
-							>
-								<MenuIcon />
-							</IconButton>
-							<Box
-								display={'flex'}
-								alignItems={'center'}
-								flexDirection={'row'}
-								justifyContent={'space-between'}
-								width={'100%'}
-								marginLeft={2}
-							>
-								<Box display={'flex'}>
-									<Search />
-									<CurrentPositionBtn />
-								</Box>
-								<Box display={{ xs: 'none', sm: 'block' }}>
-									<ToggleThemeButton />
-								</Box>
-							</Box>
-						</Toolbar>
-					</AppBar>
-					<Drawer
-						variant="temporary"
-						open={mobileOpen}
-						onClose={() => setMobileOpen(false)}
-						ModalProps={
-							{
-								// keepMounted: true,
-							}
-						}
-					>
-						<Box p={{ xs: '', sm: 'sm' }} width={'100vw'}>
-							<NavList />
-						</Box>
-					</Drawer>
+					<AppBarCustom />
+					<NavDrawer />
 				</>
 			)}
 
@@ -87,6 +31,8 @@ function Layout() {
 					overflow: isMobile ? 'auto' : 'hidden', // Auto overflow for mobile, hidden for desktop
 				}}
 			>
+				
+				{/* DESKTOP NAVIGATION */}
 				{!isMobile && (
 					<Box
 						sx={{
@@ -102,7 +48,6 @@ function Layout() {
 					</Box>
 				)}
 				<Box sx={{ flexGrow: 1, overflow: 'auto', maxHeight: '100vh' }}>
-					{/* Ensure content can scroll */}
 					<Container maxWidth="xl" disableGutters>
 						<Grid
 							container
@@ -126,8 +71,8 @@ function Layout() {
 						</Grid>
 					</Container>
 
+					{/* MAIN CONTENT */}
 					<Box
-						// p={3}
 						padding={0}
 						marginRight={2}
 						marginBottom={2}

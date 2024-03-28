@@ -43,8 +43,6 @@ const MapComponent: React.FC = () => {
 
 			map.on('singleclick', (evt) => {
 				const lonLat = toLonLat(evt.coordinate);
-                console.log("lonlat",lonLat);
-
 				setSelectedCoords([lonLat[0], lonLat[1]]);
 				setOpen(true);
 			});

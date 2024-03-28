@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CircularProgress from '@mui/material/CircularProgress'; // Import for the loading spinner
 import IconButton from '@mui/material/IconButton';
 import { getWeatherByCoords } from 'api/WeatherService';
 import { useWeatherContext } from 'context/weatherContext';
+import { useNavigate } from 'react-router-dom';
 
 const CurrentPositionBtn = () => {
     const { setWeatherData } = useWeatherContext();
     const [isLoading, setIsLoading] = useState(false); // State to track loading status
+    const navigate = useNavigate();
 
     const handleLocation = async () => {
         if (navigator.geolocation) {
+            navigate('/');
             setIsLoading(true); // Start loading
             navigator.geolocation.getCurrentPosition(async (position) => {
                 const { latitude, longitude } = position.coords;
