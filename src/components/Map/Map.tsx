@@ -5,7 +5,7 @@ import 'ol/ol.css';
 import { Map, View } from 'ol';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
-import { fromLonLat } from 'ol/proj';
+import { fromLonLat, toLonLat } from 'ol/proj';
 import {
 	Button,
 	Dialog,
@@ -42,8 +42,10 @@ const MapComponent: React.FC = () => {
 			});
 
 			map.on('singleclick', (evt) => {
-				const coords = fromLonLat(evt.coordinate) as [number, number];
-				setSelectedCoords(coords);
+				const lonLat = toLonLat(evt.coordinate);
+                console.log("lonlat",lonLat);
+
+				setSelectedCoords([lonLat[0], lonLat[1]]);
 				setOpen(true);
 			});
 		}
@@ -55,9 +57,7 @@ const MapComponent: React.FC = () => {
 
 	const handleConfirm = async () => {
 		if (selectedCoords) {
-			// Here, you'd fetch the weather data for the selectedCoords
-			// For this example, let's pretend we have a function to fetch weather data
-			const weatherData = await getWeatherByCoords(selectedCoords[0], selectedCoords[1]);
+			const weatherData = await getWeatherByCoords(selectedCoords[1], selectedCoords[0]);
 			setWeatherData(weatherData);
 
 			navigate('/');
