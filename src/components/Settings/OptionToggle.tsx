@@ -16,7 +16,7 @@ const OptionToggle: React.FC<OptionProps> = ({
 	title,
 	options,
 	onOptionChange,
-	currentValue
+	currentValue,
 }) => {
 	const { theme } = useThemeContext();
 	const [selectedOption, setSelectedOption] = useState<string>(options[0]);
@@ -25,7 +25,7 @@ const OptionToggle: React.FC<OptionProps> = ({
 		// Update the selected option when the currentValue changes.
 		// This is useful if the settings change from outside this component.
 		setSelectedOption(currentValue);
-	  }, [currentValue]);
+	}, [currentValue]);
 
 	const handleSelection = (
 		event: React.MouseEvent<HTMLElement>,
