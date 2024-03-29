@@ -1,7 +1,5 @@
 import { CityOption } from 'types/types';
 import { GeoAPIMockData, WeatherAndForecastMockData } from './mockData';
-import { useWeatherContext } from 'context/weatherContext';
-import { useSettingsContext } from 'context/SettingsContext';
 
 export const geoApiOptions = () => {
 	const apiKey = process.env.REACT_APP_X_RAPID_API_KEY;
