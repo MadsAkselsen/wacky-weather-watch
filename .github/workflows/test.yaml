@@ -30,7 +30,7 @@ jobs:
       run: npm install
 
     - name: Run Playwright tests
-      run: npm test
+      run: npx playwright test
 
     - name: Upload Playwright test artifacts
       uses: actions/upload-artifact@v2
