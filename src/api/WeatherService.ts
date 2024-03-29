@@ -1,5 +1,7 @@
 import { CityOption } from 'types/types';
 import { GeoAPIMockData, WeatherAndForecastMockData } from './mockData';
+import { useWeatherContext } from 'context/weatherContext';
+import { useSettingsContext } from 'context/SettingsContext';
 
 export const geoApiOptions = () => {
 	const apiKey = process.env.REACT_APP_X_RAPID_API_KEY;
@@ -21,9 +23,9 @@ export const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY; // openwea
 const citiesSearchCache = new Map<string, any>();
 const weatherCache = new Map<string, any>();
 
-export const getCities = async (inputValue: string) => {
+export const getCities = async (useMockData: boolean, inputValue: string) => {
 	// Use mock data if the environment variable is set to save API calls
-	if (process.env.REACT_APP_USE_MOCK_DATA) {
+	if (useMockData) {
 		return GeoAPIMockData;
 	}
 	// Check if the response for the inputValue is already in the cache
@@ -47,9 +49,12 @@ export const getCities = async (inputValue: string) => {
 	}
 };
 
-export const getWeatherByCity = async (searchData: CityOption) => {
+export const getWeatherByCity = async (
+	useMockData: boolean,
+	searchData: CityOption,
+) => {
 	// Use mock data if the environment variable is set to save API calls
-	if (process.env.REACT_APP_USE_MOCK_DATA) {
+	if (useMockData) {
 		return WeatherAndForecastMockData;
 	}
 	// const [lat, lon] = searchData.value.split(' ');
@@ -82,17 +87,20 @@ export const getWeatherByCity = async (searchData: CityOption) => {
 	}
 };
 
-export const getWeatherByCoords = async (lat: number, lon: number) => {
-	console.log("getWeatherByCoords", lat, lon);
+export const getWeatherByCoords = async (
+	useMockData: boolean,
+	lat: number,
+	lon: number,
+) => {
 	// Use mock data if the environment variable is set to save API calls
-	if (process.env.REACT_APP_USE_MOCK_DATA) {
+	if (useMockData) {
 		return WeatherAndForecastMockData;
 	}
 
 	// Check if the response for the inputValue is already in the cache
-	if (weatherCache.has(`${lat+lon}`)) {
-		console.log('Returning cached data for:', `${lat+lon}`);
-		return weatherCache.get(`${lat+lon}`); // Return cached data
+	if (weatherCache.has(`${lat + lon}`)) {
+		console.log('Returning cached data for:', `${lat + lon}`);
+		return weatherCache.get(`${lat + lon}`); // Return cached data
 	}
 
 	try {
@@ -107,7 +115,7 @@ export const getWeatherByCoords = async (lat: number, lon: number) => {
 		const forecastData = await forcastResponse.json();
 
 		// Cache the response for future requests
-		weatherCache.set(`${lat+lon}`, { weatherData, forecastData });
+		weatherCache.set(`${lat + lon}`, { weatherData, forecastData });
 
 		return { weatherData, forecastData };
 	} catch (error) {

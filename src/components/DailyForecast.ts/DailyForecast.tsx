@@ -1,11 +1,12 @@
-import { useContext } from 'react';
 import { Grid, Box, Typography, Divider } from '@mui/material';
+import { useSettingsContext } from 'context/SettingsContext';
 
-import { WeatherContext, WeatherContextType } from 'context/weatherContext';
-import { formatDate } from 'utils/formatDate';
+import { useWeatherContext } from 'context/weatherContext';
+import { convertTemperature, formatDate } from 'utils/utils';
 
 const DailyForecast = () => {
-	const { weatherData } = useContext(WeatherContext) as WeatherContextType;
+	const { weatherData } = useWeatherContext();
+	const { temperatureUnit } = useSettingsContext();
 
 	if (!weatherData) {
 		return null;
@@ -54,7 +55,7 @@ const DailyForecast = () => {
 								<Typography
 									variant="h6"
 									sx={{ flex: 1 }}
-								>{`${Math.round(forecast.main.temp_max)}°/${Math.round(forecast.main.temp_min)}°`}</Typography>
+								>{`${Math.round(forecast.main.temp_max)}°/${Math.round(convertTemperature(forecast.main.temp_min, temperatureUnit))}°${temperatureUnit === 'Celsius' ? 'C' : 'F'}`}</Typography>
 								<Typography variant="body2" sx={{ flex: 1 }}>
 									{forecast.weather[0].main}
 								</Typography>

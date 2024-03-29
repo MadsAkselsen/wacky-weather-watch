@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import { useWeatherContext } from 'context/weatherContext';
 import { getWeatherByCoords } from 'api/WeatherService';
+import { useFetchData } from 'hooks/useFetchData';
 
 const MapComponent: React.FC = () => {
 	const mapRef = useRef<HTMLDivElement>(null);
@@ -25,6 +26,7 @@ const MapComponent: React.FC = () => {
 	>(null);
 	const navigate = useNavigate();
 	const { setWeatherData } = useWeatherContext();
+	const generalFetch = useFetchData();
 
 	useEffect(() => {
 		if (mapRef.current) {
@@ -55,7 +57,11 @@ const MapComponent: React.FC = () => {
 
 	const handleConfirm = async () => {
 		if (selectedCoords) {
-			const weatherData = await getWeatherByCoords(selectedCoords[1], selectedCoords[0]);
+			const weatherData = await generalFetch(
+				getWeatherByCoords,
+				selectedCoords[1],
+				selectedCoords[0],
+			);
 			setWeatherData(weatherData);
 
 			navigate('/');
@@ -64,7 +70,15 @@ const MapComponent: React.FC = () => {
 
 	return (
 		<>
-			<div ref={mapRef} style={{ width: '100%', height: '100%', overflow: 'hidden', margin: '16px' }}></div>
+			<div
+				ref={mapRef}
+				style={{
+					width: '100%',
+					height: '100%',
+					overflow: 'hidden',
+					margin: '16px',
+				}}
+			></div>
 			<Dialog open={open} onClose={handleClose}>
 				<DialogTitle>Confirm Location</DialogTitle>
 				<DialogContent>
