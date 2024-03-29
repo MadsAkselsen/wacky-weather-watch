@@ -3,8 +3,12 @@ import { WeatherAndForecastData } from 'types/types';
 
 
 export interface WeatherContextType {
+    // API weather data
     weatherData: WeatherAndForecastData|null;
     setWeatherData: Dispatch<SetStateAction<WeatherAndForecastData|null>>;
+    // Flag controlling use of mock data
+    useMockData: boolean;
+    setUseMockData: Dispatch<SetStateAction<boolean>>; 
 }
 
 const initialState: WeatherAndForecastData|null = null;
@@ -13,9 +17,10 @@ export const WeatherContext = React.createContext<WeatherContextType | null>(nul
 
 export const WeatherContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
     const [weatherData, setWeatherData] = useState<WeatherAndForecastData|null>(initialState);
+    const [useMockData, setUseMockData] = useState<boolean>(false);
 
     return (
-        <WeatherContext.Provider value={{ weatherData, setWeatherData }}>
+        <WeatherContext.Provider value={{ weatherData, setWeatherData, useMockData, setUseMockData }}>
             {children}
         </WeatherContext.Provider>
     );

@@ -5,6 +5,7 @@ import { getCities, getWeatherByCity } from 'api/WeatherService';
 import { CityOption } from 'types/types';
 import { useWeatherContext } from 'context/weatherContext';
 import { useThemeContext } from 'context/themeContext';
+import { useFetchData } from 'hooks/useFetchData';
 
 // Hook for custom styles for <AsyncPaginate >
 const useSelectStyles = () => {
@@ -77,6 +78,7 @@ const useSelectStyles = () => {
 const Search: React.FC = () => {
 	const [search, setSearch] = useState<CityOption | null>(null);
 	const { setWeatherData } = useWeatherContext();
+	const generalFetch = useFetchData();
 
 	const styles = useSelectStyles();
 
@@ -85,13 +87,13 @@ const Search: React.FC = () => {
 	};
 
 	const updateWeather = async (searchData: CityOption) => {
-		console.log("=>>>>> udpate weather", searchData)
-		const weatherData = await getWeatherByCity(searchData);
+		const weatherData = await generalFetch(getWeatherByCity, searchData)
+		// const weatherData = await getWeatherByCity(searchData);
 		setWeatherData(weatherData);
 	};
 
 	const loadOptions = (inputValue: string) => {
-		return getCities(inputValue)
+		return generalFetch(getCities, inputValue)
 			.then((response) => {
 				return {
 					options: response.data.map((city: any) => {
