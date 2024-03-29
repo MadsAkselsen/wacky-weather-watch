@@ -40,7 +40,7 @@ module.exports = {
         screenshot: 'only-on-failure',
     },
     // Output directory for test artifacts such as screenshots
-    outputDir: './test-results/',
+    outputDir: './playwright-report/',
 };
 
 // Run tests in all browsers: `npx playwright test`
