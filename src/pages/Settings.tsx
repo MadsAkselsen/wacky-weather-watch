@@ -16,7 +16,6 @@ const Settings: React.FC = () => {
     setUseMockData,
   } = useSettingsContext();
 
-
   return (
     <Container
       maxWidth="xl"

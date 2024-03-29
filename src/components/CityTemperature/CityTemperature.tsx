@@ -2,7 +2,7 @@ import React from 'react';
 import { useWeatherContext } from 'context/weatherContext';
 import { Typography, Box } from '@mui/material';
 import { useSettingsContext } from 'context/SettingsContext';
-import { convertTemperature } from 'utils/formatDate';
+import { convertTemperature } from 'utils/utils';
 
 interface CityInfoProps {
 	transparent?: boolean;
@@ -11,8 +11,6 @@ interface CityInfoProps {
 const CityInfo: React.FC<CityInfoProps> = ({ transparent = true }) => {
 	const { weatherData } = useWeatherContext();
 	const { temperatureUnit } = useSettingsContext();
-
-	console.log("temperatureUnit: ", temperatureUnit);
 
 	if (!weatherData) {
 		return null;

@@ -1,6 +1,7 @@
 import { CityOption } from 'types/types';
 import { GeoAPIMockData, WeatherAndForecastMockData } from './mockData';
 import { useWeatherContext } from 'context/weatherContext';
+import { useSettingsContext } from 'context/SettingsContext';
 
 export const geoApiOptions = () => {
 	const apiKey = process.env.REACT_APP_X_RAPID_API_KEY;
@@ -48,18 +49,6 @@ export const getCities = async (useMockData: boolean, inputValue: string) => {
 	}
 };
 
-export const useCitySearch = (inputValue: string) => {
-	const { useMockData } = useWeatherContext();
-
-	// Implement the fetching logic directly or use useAPIData if adapted for this purpose
-	// For simplicity, here's a direct implementation example:
-	const fetchCities = async () => {
-		return await getCities(useMockData, inputValue);
-	};
-
-	return fetchCities;
-};
-
 export const getWeatherByCity = async (
 	useMockData: boolean,
 	searchData: CityOption,
@@ -96,16 +85,6 @@ export const getWeatherByCity = async (
 		console.error('Failed to fetch weather:', error);
 		return null;
 	}
-};
-
-export const useWeatherByCity = (searchData: CityOption) => {
-	const { useMockData } = useWeatherContext();
-
-	const fetchWeather = async () => {
-		return await getWeatherByCity(useMockData, searchData);
-	};
-
-	return fetchWeather;
 };
 
 export const getWeatherByCoords = async (

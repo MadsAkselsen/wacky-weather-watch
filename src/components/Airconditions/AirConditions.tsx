@@ -1,9 +1,12 @@
 // AirConditions.tsx
 import { Box, Typography, Grid } from '@mui/material';
+import { useSettingsContext } from 'context/SettingsContext';
 import { useWeatherContext } from 'context/weatherContext';
+import { convertSpeed, convertTemperature } from 'utils/utils';
 
 const AirConditions = () => {
 	const { weatherData } = useWeatherContext();
+	const { temperatureUnit, windSpeedUnit } = useSettingsContext();
 
 	if (!weatherData) {
 		return null;
@@ -29,7 +32,7 @@ const AirConditions = () => {
 							Real Feel
 						</Typography>
 						<Typography variant="h6" component="span">
-							{Math.round(feels_like)}°
+							{Math.round(convertTemperature(feels_like, temperatureUnit))}°{temperatureUnit === 'Celsius' ? 'C' : 'F'}
 						</Typography>
 					</Box>
 					<Box>
@@ -37,7 +40,7 @@ const AirConditions = () => {
 							Wind
 						</Typography>
 						<Typography variant="h6" component="span">
-							{speed} km/h
+							{convertSpeed(speed, windSpeedUnit)}
 						</Typography>
 					</Box>
 				</Grid>
