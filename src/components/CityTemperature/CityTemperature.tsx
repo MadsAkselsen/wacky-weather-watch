@@ -1,6 +1,8 @@
 import React from 'react';
 import { useWeatherContext } from 'context/weatherContext';
 import { Typography, Box } from '@mui/material';
+import { useSettingsContext } from 'context/SettingsContext';
+import { convertTemperature } from 'utils/formatDate';
 
 interface CityInfoProps {
 	transparent?: boolean;
@@ -8,6 +10,9 @@ interface CityInfoProps {
 
 const CityInfo: React.FC<CityInfoProps> = ({ transparent = true }) => {
 	const { weatherData } = useWeatherContext();
+	const { temperatureUnit } = useSettingsContext();
+
+	console.log("temperatureUnit: ", temperatureUnit);
 
 	if (!weatherData) {
 		return null;
@@ -29,7 +34,11 @@ const CityInfo: React.FC<CityInfoProps> = ({ transparent = true }) => {
 			}}
 		>
 			<Box
-				display="flex" flexDirection="column"  justifyContent={'space-between'} height={'100%'} gap={6}
+				display="flex"
+				flexDirection="column"
+				justifyContent={'space-between'}
+				height={'100%'}
+				gap={6}
 			>
 				<Box>
 					<Typography variant="h4" component="h1">
@@ -45,7 +54,13 @@ const CityInfo: React.FC<CityInfoProps> = ({ transparent = true }) => {
 					</Typography>
 				</Box>
 				<Typography variant="h2">
-					{Math.round(weatherData.weatherData.main.temp)}°
+					{Math.round(
+						convertTemperature(
+							weatherData.weatherData.main.temp,
+							temperatureUnit,
+						),
+					)}
+					°{temperatureUnit === 'Celsius' ? 'C' : 'F'}
 				</Typography>
 			</Box>
 			<img
