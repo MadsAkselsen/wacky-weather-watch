@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { WeatherContext, WeatherContextType } from 'context/weatherContext';
+import React from 'react';
+import { useWeatherContext } from 'context/weatherContext';
 import { Typography, Box } from '@mui/material';
 
 interface CityInfoProps {
@@ -7,7 +7,7 @@ interface CityInfoProps {
 }
 
 const CityInfo: React.FC<CityInfoProps> = ({ transparent = true }) => {
-	const { weatherData } = useContext(WeatherContext) as WeatherContextType;
+	const { weatherData } = useWeatherContext();
 
 	if (!weatherData) {
 		return null;

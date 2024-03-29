@@ -1,11 +1,10 @@
-import { useContext } from 'react';
 import { Grid, Box, Typography, Divider } from '@mui/material';
 
-import { WeatherContext, WeatherContextType } from 'context/weatherContext';
+import { useWeatherContext } from 'context/weatherContext';
 import { formatDate } from 'utils/formatDate';
 
 const DailyForecast = () => {
-	const { weatherData } = useContext(WeatherContext) as WeatherContextType;
+	const { weatherData } = useWeatherContext();
 
 	if (!weatherData) {
 		return null;

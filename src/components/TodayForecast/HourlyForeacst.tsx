@@ -1,11 +1,10 @@
 // HourlyForecast.tsx
-import React, { useContext } from 'react';
 import { Box, Divider, Typography } from '@mui/material';
 import HourlyEntry from './HourlyEntry';
-import { WeatherContext, WeatherContextType } from 'context/weatherContext';
+import { useWeatherContext } from 'context/weatherContext';
 
 const HourlyForecast = () => {
-	const { weatherData } = useContext(WeatherContext) as WeatherContextType;
+	const { weatherData } = useWeatherContext();
 
 	if (!weatherData) {
 		return null;
