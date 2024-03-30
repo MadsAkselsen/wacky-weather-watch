@@ -1,9 +1,9 @@
-// MapComponent.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'ol/ol.css';
 import { Map, View } from 'ol';
 import TileLayer from 'ol/layer/Tile';
+import XYZ from 'ol/source/XYZ';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import {
 	Box,
@@ -17,10 +17,11 @@ import {
 import { useWeatherContext } from 'context/weatherContext';
 import { getWeatherByCoords } from 'api/WeatherService';
 import { useFetchData } from 'hooks/useFetchData';
-import XYZ from 'ol/source/XYZ';
 
 const MapComponent: React.FC = () => {
 	const mapRef = useRef<HTMLDivElement>(null);
+	const mapInstanceRef = useRef<Map | null>(null); // Hold the OpenLayers Map instance
+	const [isMapReady, setIsMapReady] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [selectedCoords, setSelectedCoords] = useState<
 		[number, number] | null
@@ -30,15 +31,17 @@ const MapComponent: React.FC = () => {
 	const generalFetch = useFetchData();
 
 	useEffect(() => {
-		if (mapRef.current) {
-			const map = new Map({
+		if (mapRef.current && !mapInstanceRef.current) {
+			console.log('setting up map');
+			const initMap = new Map({
 				target: mapRef.current,
 				layers: [
 					new TileLayer({
 						source: new XYZ({
-							attributions: '© OpenStreetMap contributors, © CARTO',
+							attributions:
+								'© OpenStreetMap contributors, © CARTO',
 							url: 'https://{1-4}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-						  }),
+						}),
 					}),
 				],
 				view: new View({
@@ -47,7 +50,13 @@ const MapComponent: React.FC = () => {
 				}),
 			});
 
-			map.on('singleclick', (evt) => {
+			mapInstanceRef.current = initMap; // Store the map instance
+
+			initMap.on('postrender', () => {
+				setIsMapReady(true);
+			});
+
+			initMap.on('singleclick', (evt) => {
 				const lonLat = toLonLat(evt.coordinate);
 				setSelectedCoords([lonLat[0], lonLat[1]]);
 				setOpen(true);
@@ -55,20 +64,41 @@ const MapComponent: React.FC = () => {
 		}
 	}, []);
 
+	const flyTo = (location: [number, number], doneCallback: () => void) => {
+		const view = mapInstanceRef.current?.getView();
+		if (!view) return;
+
+		view.animate(
+			{
+				center: fromLonLat(location),
+				zoom: 10,
+				duration: 2000,
+			},
+			() => {
+				console.log('Animation completed.');
+				navigate('/');
+			},
+		);
+	};
+
 	const handleClose = () => {
 		setOpen(false);
 	};
 
 	const handleConfirm = async () => {
 		if (selectedCoords) {
-			const weatherData = await generalFetch(
+			await generalFetch(
 				getWeatherByCoords,
 				selectedCoords[1],
 				selectedCoords[0],
-			);
-			setWeatherData(weatherData);
+			)
+				.then(setWeatherData)
+				.catch(console.error); // Always good to catch potential errors
 
-			navigate('/');
+			setOpen(false);
+			if (isMapReady) {
+				flyTo(selectedCoords, () => navigate('/'));
+			}
 		}
 	};
 
@@ -76,12 +106,12 @@ const MapComponent: React.FC = () => {
 		<>
 			<Box
 				ref={mapRef}
-				style={{
+				sx={{
 					height: '100%',
 					overflow: 'hidden',
 					borderRadius: '10px',
 				}}
-			></Box>
+			/>
 			<Dialog open={open} onClose={handleClose}>
 				<DialogTitle>Confirm Location</DialogTitle>
 				<DialogContent>
