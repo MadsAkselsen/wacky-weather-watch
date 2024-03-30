@@ -28,7 +28,7 @@ function Layout() {
 				sx={{
 					display: 'flex',
 					height: isMobile ? 'auto' : '100vh', // Auto height for mobile, 100vh for desktop
-					overflow: isMobile ? 'auto' : 'hidden', // Auto overflow for mobile, hidden for desktop
+					overflow: 'hidden', // Auto overflow for mobile, hidden for desktop
 				}}
 			>
 				
@@ -47,7 +47,7 @@ function Layout() {
 						<NavList />
 					</Box>
 				)}
-				<Box sx={{ flexGrow: 1, overflow: 'auto', maxHeight: '100vh' }}>
+				<Box sx={{ flexGrow: 1, overflow: 'hidden', maxHeight: '100vh' }}>
 					<Container maxWidth="xl" disableGutters>
 						<Grid
 							container
