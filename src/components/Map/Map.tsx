@@ -7,6 +7,7 @@ import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -70,15 +71,15 @@ const MapComponent: React.FC = () => {
 
 	return (
 		<>
-			<div
+			<Box
 				ref={mapRef}
 				style={{
-					width: '100%',
 					height: '100%',
 					overflow: 'hidden',
-					margin: '16px',
+					// margin: '16px',
+					borderRadius: '10px',
 				}}
-			></div>
+			></Box>
 			<Dialog open={open} onClose={handleClose}>
 				<DialogTitle>Confirm Location</DialogTitle>
 				<DialogContent>

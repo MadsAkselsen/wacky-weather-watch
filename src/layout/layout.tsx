@@ -16,7 +16,14 @@ function Layout() {
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	return (
-		<>
+		<Box
+			sx={{
+				display: 'flex',
+				flexDirection: 'column', // Stack children vertically
+				height: '100vh', // Make this Box fill the entire viewport height
+				overflow: 'hidden', // Prevent the Box itself from scrolling
+			}}
+		>
 			{isMobile && (
 				<>
 					<AppBarCustom />
@@ -27,15 +34,14 @@ function Layout() {
 			<Box
 				sx={{
 					display: 'flex',
-					height: isMobile ? 'auto' : '100vh', // Auto height for mobile, 100vh for desktop
-					overflow: 'hidden', // Auto overflow for mobile, hidden for desktop
+					flex: 1, // This Box will take up all available space
+					overflow: 'auto', // Allow this Box to scroll
 				}}
 			>
 				{/* DESKTOP NAVIGATION */}
 				{!isMobile && (
 					<Box
 						sx={{
-							height: '95%',
 							width: '80px',
 						}}
 						marginLeft={2}
@@ -48,9 +54,7 @@ function Layout() {
 				)}
 				<Box
 					sx={{
-						flexGrow: 1,
 						overflow: 'auto',
-						maxHeight: '100vh',
 						scrollbarWidth: 'thin', // For Firefox
 						scrollbarColor: (theme) =>
 							`${theme.palette.primary.main} ${theme.palette.background.default}`, // For Firefox, using theme colors
@@ -68,6 +72,7 @@ function Layout() {
 							border: (theme) =>
 								`3px solid ${theme.palette.background.default}`, // Optional: Add some space between the thumb and track
 						},
+						width: '100%',
 					}}
 				>
 					<Container maxWidth="xl" disableGutters>
@@ -94,7 +99,17 @@ function Layout() {
 					</Container>
 
 					{/* MAIN CONTENT */}
-					<Box padding={0} marginRight={2} marginBottom={2}>
+					<Box
+						padding={0}
+						marginRight={2}
+						marginBottom={2}
+						sx={{
+							flexGrow: 1,
+							display: 'flex',
+							// flex: 1
+							// overflow: 'auto',
+						}}
+					>
 						<Routes>
 							<Route path="/" element={<WeatherInfo />} />
 							<Route path="/cities" element={<Cities />} />
@@ -104,7 +119,7 @@ function Layout() {
 					</Box>
 				</Box>
 			</Box>
-		</>
+		</Box>
 	);
 }
 

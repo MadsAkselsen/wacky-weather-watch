@@ -20,7 +20,6 @@ const Settings: React.FC = () => {
 		<Container
 			maxWidth="xl"
 			disableGutters
-			
 		>
 			<Grid container spacing={2} sx={{ width: '100%', margin: 0 }}>
 				<Grid item xs={12}>
@@ -30,7 +29,7 @@ const Settings: React.FC = () => {
 							padding: 2,
 							bgcolor: theme.palette.background.paper,
 							width: '100%',
-							display: 'flex',
+							// display: 'flex',
 							flexDirection: 'column',
 							alignItems: 'center',
 						}}
