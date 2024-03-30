@@ -4,7 +4,7 @@ import React from 'react';
 
 const Map: React.FC = () => {
 	return (
-		<Container maxWidth="xl" disableGutters sx={{ height: '80vh' }}>
+		<Container maxWidth="xl" disableGutters sx={{height: '90vh', borderRadius: '5px', marginTop: '16px', marginLeft: '16px'}}>
 			<MapComponent />
 		</Container>
 	);

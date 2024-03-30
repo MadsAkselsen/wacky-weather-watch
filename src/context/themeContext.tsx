@@ -23,93 +23,119 @@ const LinkBehavior = React.forwardRef<
 	return <RouterLink ref={ref} to={href} {...other} />;
 });
 
+const cursorImageUrl = '../../cursor.png';
+console.log("cursorImageUrl", cursorImageUrl);
+
 // Light theme
 const lightTheme = createTheme({
 	palette: {
-	  mode: 'light',
-	  primary: {
-		main: '#FFA726', // Soft orange for primary actions and accents
-	  },
-	  secondary: {
-		main: '#64B5F6', // Light blue for less prominent elements, secondary actions
-	  },
-	  background: {
-		default: '#F0F0F0', // Light grey for main background
-		paper: '#FFFFFF', // Pure white for components like Card, Paper, etc.
-	  },
-	  text: {
-		primary: '#202020', // Dark grey for primary text for better readability
-		secondary: '#575757', // Lighter grey for secondary text
-	  },
-	  divider: '#E0E0E0', // Light grey for dividers
-	  // Might need to add custom properties to use for borders and hover states, not native to MUI's theme structure
+		mode: 'light',
+		primary: {
+			main: '#FFA726', // Soft orange for primary actions and accents
+		},
+		secondary: {
+			main: '#64B5F6', // Light blue for less prominent elements, secondary actions
+		},
+		background: {
+			default: '#F0F0F0', // Light grey for main background
+			paper: '#FFFFFF', // Pure white for components like Card, Paper, etc.
+		},
+		text: {
+			primary: '#202020', // Dark grey for primary text for better readability
+			secondary: '#575757', // Lighter grey for secondary text
+		},
+		divider: '#E0E0E0', // Light grey for dividers
+		// Might need to add custom properties to use for borders and hover states, not native to MUI's theme structure
 	},
 	components: {
-	  MuiLink: {
-		defaultProps: {
-		  component: LinkBehavior,
-		} as LinkProps,
-	  },
-	  MuiButtonBase: {
-		defaultProps: {
-		  LinkComponent: LinkBehavior,
+		MuiCssBaseline: {
+			styleOverrides: `
+			  html, body {
+				overflow: hidden;
+				height: 100%;
+			  }
+			  html, body, &:hover {
+				cursor: url('${cursorImageUrl}'), auto;
+			  }
+			`,
 		},
-	  },
-	  // Apply divider color to components that use borders/dividers
-	  MuiDivider: {
-		styleOverrides: {
-		  root: {
-			backgroundColor: '#E0E0E0', // Divider color
-		  },
-		},
-	  },
-	  MuiCard: {
-		styleOverrides: {
-		  root: {
-			borderColor: '#D6D6D6', // For card borders if applicable
-		  },
-		},
-	  },
-	  // ...other component overrides
-	},
-	// ...other theme overrides
-  });
-  
-  // Dark theme
-  const darkTheme = createTheme({
-	palette: {
-	  mode: 'dark',
-	  primary: {
-		main: '#90caf9', // Example primary color for dark mode
-	  },
-	  secondary: {
-		main: '#f48fb1', // Example secondary color for dark mode
-	  },
-	  background: {
-		default: '#0b131d', // Darker background for dark mode
-		paper: '#1f2c3b', // Darker paper components background
-		
-	  },
-	  text: {
-		primary: '#ffffff', // White for primary text in dark mode
-		secondary: '#bbbbbb', // A lighter gray for secondary text in dark mode
-	  },
-	  // other customizations...
-	},
-	components: {
 		MuiLink: {
-		  defaultProps: {
-			component: LinkBehavior,
-		  } as LinkProps,
+			defaultProps: {
+				component: LinkBehavior,
+			} as LinkProps,
 		},
 		MuiButtonBase: {
-		  defaultProps: {
-			LinkComponent: LinkBehavior,
-		  },
+			defaultProps: {
+				LinkComponent: LinkBehavior,
+			},
 		},
-	  },
+		// Apply divider color to components that use borders/dividers
+		MuiDivider: {
+			styleOverrides: {
+				root: {
+					backgroundColor: '#E0E0E0', // Divider color
+				},
+			},
+		},
+		MuiCard: {
+			styleOverrides: {
+				root: {
+					borderColor: '#D6D6D6', // For card borders if applicable
+				},
+			},
+		},
+		// ...other component overrides
+	},
 	// ...other theme overrides
-  });
+});
+
+// Dark theme
+const darkTheme = createTheme({
+	palette: {
+		mode: 'dark',
+		primary: {
+			main: '#90caf9', // Example primary color for dark mode
+		},
+		secondary: {
+			main: '#f48fb1', // Example secondary color for dark mode
+		},
+		background: {
+			default: '#0b131d', // Darker background for dark mode
+			paper: '#1f2c3b', // Darker paper components background
+		},
+		text: {
+			primary: '#ffffff', // White for primary text in dark mode
+			secondary: '#bbbbbb', // A lighter gray for secondary text in dark mode
+		},
+		// other customizations...
+	},
+	components: {
+		MuiCssBaseline: {
+			styleOverrides: `
+			  html, body {
+				overflow: hidden;
+				height: 100%;
+			  },
+			  html, body, &:hover {
+				cursor: url('${cursorImageUrl}'), auto;
+			  },
+			  *, *:hover { /* This will target all elements and their hover states */
+			  cursor: url('${cursorImageUrl}'), auto !important; /* Use !important with caution */
+			`,
+		},
+		MuiLink: {
+			defaultProps: {
+				component: LinkBehavior,
+			} as LinkProps,
+		},
+		MuiButtonBase: {
+			defaultProps: {
+				LinkComponent: LinkBehavior,
+			},
+		},
+	},
+	// ...other theme overrides
+});
 
   
 

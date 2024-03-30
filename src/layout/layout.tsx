@@ -16,7 +16,14 @@ function Layout() {
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	return (
-		<>
+		<Box
+			sx={{
+				display: 'flex',
+				flexDirection: 'column', // Stack children vertically
+				height: '100vh', // Make this Box fill the entire viewport height
+				overflow: 'hidden', // Prevent the Box itself from scrolling
+			}}
+		>
 			{isMobile && (
 				<>
 					<AppBarCustom />
@@ -27,16 +34,14 @@ function Layout() {
 			<Box
 				sx={{
 					display: 'flex',
-					height: isMobile ? 'auto' : '100vh', // Auto height for mobile, 100vh for desktop
-					overflow: isMobile ? 'auto' : 'hidden', // Auto overflow for mobile, hidden for desktop
+					flex: 1, // This Box will take up all available space
+					overflow: 'auto', // Allow this Box to scroll
 				}}
 			>
-				
 				{/* DESKTOP NAVIGATION */}
 				{!isMobile && (
 					<Box
 						sx={{
-							height: '95%',
 							width: '80px',
 						}}
 						marginLeft={2}
@@ -47,7 +52,29 @@ function Layout() {
 						<NavList />
 					</Box>
 				)}
-				<Box sx={{ flexGrow: 1, overflow: 'auto', maxHeight: '100vh' }}>
+				<Box
+					sx={{
+						overflow: 'auto',
+						scrollbarWidth: 'thin', // For Firefox
+						scrollbarColor: (theme) =>
+							`${theme.palette.primary.main} ${theme.palette.background.default}`, // For Firefox, using theme colors
+						'&::-webkit-scrollbar': {
+							width: '8px', // Adjust as needed
+						},
+						'&::-webkit-scrollbar-track': {
+							backgroundColor: (theme) =>
+								theme.palette.background.default,
+						},
+						'&::-webkit-scrollbar-thumb': {
+							backgroundColor: (theme) =>
+								theme.palette.primary.main,
+							borderRadius: '20px',
+							border: (theme) =>
+								`3px solid ${theme.palette.background.default}`, // Optional: Add some space between the thumb and track
+						},
+						width: '100%',
+					}}
+				>
 					<Container maxWidth="xl" disableGutters>
 						<Grid
 							container
@@ -77,7 +104,10 @@ function Layout() {
 						marginRight={2}
 						marginBottom={2}
 						sx={{
-							overflow: 'auto',
+							flexGrow: 1,
+							display: 'flex',
+							// flex: 1
+							// overflow: 'auto',
 						}}
 					>
 						<Routes>
@@ -89,7 +119,7 @@ function Layout() {
 					</Box>
 				</Box>
 			</Box>
-		</>
+		</Box>
 	);
 }
 
