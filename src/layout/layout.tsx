@@ -31,7 +31,6 @@ function Layout() {
 					overflow: 'hidden', // Auto overflow for mobile, hidden for desktop
 				}}
 			>
-				
 				{/* DESKTOP NAVIGATION */}
 				{!isMobile && (
 					<Box
@@ -47,7 +46,30 @@ function Layout() {
 						<NavList />
 					</Box>
 				)}
-				<Box sx={{ flexGrow: 1, overflow: 'hidden', maxHeight: '100vh' }}>
+				<Box
+					sx={{
+						flexGrow: 1,
+						overflow: 'auto',
+						maxHeight: '100vh',
+						scrollbarWidth: 'thin', // For Firefox
+						scrollbarColor: (theme) =>
+							`${theme.palette.primary.main} ${theme.palette.background.default}`, // For Firefox, using theme colors
+						'&::-webkit-scrollbar': {
+							width: '8px', // Adjust as needed
+						},
+						'&::-webkit-scrollbar-track': {
+							backgroundColor: (theme) =>
+								theme.palette.background.default,
+						},
+						'&::-webkit-scrollbar-thumb': {
+							backgroundColor: (theme) =>
+								theme.palette.primary.main,
+							borderRadius: '20px',
+							border: (theme) =>
+								`3px solid ${theme.palette.background.default}`, // Optional: Add some space between the thumb and track
+						},
+					}}
+				>
 					<Container maxWidth="xl" disableGutters>
 						<Grid
 							container
@@ -72,14 +94,7 @@ function Layout() {
 					</Container>
 
 					{/* MAIN CONTENT */}
-					<Box
-						padding={0}
-						marginRight={2}
-						marginBottom={2}
-						sx={{
-							overflow: 'auto',
-						}}
-					>
+					<Box padding={0} marginRight={2} marginBottom={2}>
 						<Routes>
 							<Route path="/" element={<WeatherInfo />} />
 							<Route path="/cities" element={<Cities />} />
