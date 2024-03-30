@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import 'ol/ol.css';
 import { Map, View } from 'ol';
 import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import {
 	Box,
@@ -18,6 +17,7 @@ import {
 import { useWeatherContext } from 'context/weatherContext';
 import { getWeatherByCoords } from 'api/WeatherService';
 import { useFetchData } from 'hooks/useFetchData';
+import XYZ from 'ol/source/XYZ';
 
 const MapComponent: React.FC = () => {
 	const mapRef = useRef<HTMLDivElement>(null);
@@ -35,7 +35,10 @@ const MapComponent: React.FC = () => {
 				target: mapRef.current,
 				layers: [
 					new TileLayer({
-						source: new OSM(),
+						source: new XYZ({
+							attributions: '© OpenStreetMap contributors, © CARTO',
+							url: 'https://{1-4}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+						  }),
 					}),
 				],
 				view: new View({
@@ -76,7 +79,6 @@ const MapComponent: React.FC = () => {
 				style={{
 					height: '100%',
 					overflow: 'hidden',
-					// margin: '16px',
 					borderRadius: '10px',
 				}}
 			></Box>
