@@ -17,7 +17,7 @@ jobs:
       run: |
         echo "REACT_APP_X_RAPID_API_KEY=${{ secrets.REACT_APP_X_RAPID_API_KEY }}" >> $GITHUB_ENV
         echo "REACT_APP_WEATHER_API_KEY=${{ secrets.REACT_APP_WEATHER_API_KEY }}" >> $GITHUB_ENV
-        echo "REACT_APP_API_BASE_URL=http://161.35.30.228:8080" >> $GITHUB_ENV
+        echo "REACT_APP_WEATHER_API_BASE_URL=http://161.35.30.228:8080" >> $GITHUB_ENV
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
