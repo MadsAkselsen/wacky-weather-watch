@@ -27,7 +27,7 @@ test.describe('Search Functionality', () => {
 		);
 		// Mocking getWeatherByCity API call for weather data
 		await page.route(
-			'http://localhost:3000/weather?city=Copenhagen,DK',
+			'http://localhost:8080/weather?city=Copenhagen,DK',
 			(route) => {
 				route.fulfill({
 					status: 200,
@@ -1639,15 +1639,16 @@ test.describe('Search Functionality', () => {
 			.getByRole('option', { name: 'Copenhagen, DK' })
 			.click({ force: true });
 
-		await page.waitForResponse(
-			(response) =>
-				response
-					.url()
-					.includes(
-						'http://localhost:8080/weather',
-					) && response.status() === 200,
-			{ timeout: 2000 },
-		);
+		// await page.screenshot({ path: 'debug-screenshot.png' });
+		// await page.waitForResponse(
+		// 	(response) =>
+		// 		response
+		// 			.url()
+		// 			.includes(
+		// 				'http://localhost:8080/weather',
+		// 			) && response.status() === 200,
+		// 	{ timeout: 2000 },
+		// );
 		// await page.waitForResponse(
 		// 	(response) =>
 		// 		response

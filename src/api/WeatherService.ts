@@ -15,7 +15,6 @@ export const geoApiOptions = () => {
 	};
 };
 export const GEO_API_URL = 'https://wft-geo-db.p.rapidapi.com/v1/geo';
-export const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5';
 export const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY; // openweather API
 export const WEATHER_API_BASE_URL = 'http://localhost:8080';
 
@@ -61,6 +60,7 @@ export const getWeatherByCity = async (useMockData: boolean, searchData: CityOpt
     }
 
     try {
+		console.log("fetch", `${WEATHER_API_BASE_URL}/weather?city=${encodeURIComponent(cityName)}`)
         const response = await fetch(`${WEATHER_API_BASE_URL}/weather?city=${encodeURIComponent(cityName)}`);
         const data = await response.json();
 
