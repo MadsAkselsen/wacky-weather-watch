@@ -27,7 +27,7 @@ test.describe('Search Functionality', () => {
 		);
 		// Mocking getWeatherByCity API call for weather data
 		await page.route(
-			'http://localhost:8080/weather?city=Copenhagen,DK',
+			'http://localhost:8080/weather?city=Copenhagen%2C',
 			(route) => {
 				route.fulfill({
 					status: 200,
