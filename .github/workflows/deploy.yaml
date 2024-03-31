@@ -24,9 +24,7 @@ jobs:
         run: |
           echo "REACT_APP_X_RAPID_API_KEY=${{ secrets.REACT_APP_X_RAPID_API_KEY }}" >> $GITHUB_ENV
           echo "REACT_APP_WEATHER_API_KEY=${{ secrets.REACT_APP_WEATHER_API_KEY }}" >> $GITHUB_ENV
-          if [[ ${{ github.ref }} == 'refs/heads/main' ]]; then
-            echo "REACT_APP_WEATHER_API_BASE_URL=http://161.35.30.228:8080" >> $GITHUB_ENV
-          fi
+          echo "REACT_APP_WEATHER_API_BASE_URL=http://161.35.30.228:8080" >> $GITHUB_ENV
 
       - name: Install Dependencies
         run: npm install
