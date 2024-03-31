@@ -6,6 +6,9 @@ Build the Docker image
 Start frontend for local dev
 `make run`
 
+## Run Service and Redis
+`sudo docker-compose up --build`
+
 ## Tests
 Run tests in all browsers
 `npx playwright test`
