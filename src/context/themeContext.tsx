@@ -24,7 +24,6 @@ const LinkBehavior = React.forwardRef<
 });
 
 const cursorImageUrl = '../../cursor.png';
-console.log("cursorImageUrl", cursorImageUrl);
 
 // Light theme
 const lightTheme = createTheme({
