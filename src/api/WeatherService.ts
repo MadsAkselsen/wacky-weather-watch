@@ -16,7 +16,7 @@ export const geoApiOptions = () => {
 };
 export const GEO_API_URL = 'https://wft-geo-db.p.rapidapi.com/v1/geo';
 export const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY; // openweather API
-export const WEATHER_API_BASE_URL = 'http://localhost:8080';
+export const WEATHER_API_BASE_URL = process.env.REACT_APP_WEATHER_API_BASE_URL;
 
 const citiesSearchCache = new Map<string, any>();
 const weatherCache = new Map<string, any>();
