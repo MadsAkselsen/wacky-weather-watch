@@ -10,7 +10,10 @@ import { Theme, createTheme } from '@mui/material/styles';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { LinkProps } from '@mui/material/Link';
-import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
+import {
+	Link as RouterLink,
+	LinkProps as RouterLinkProps,
+} from 'react-router-dom';
 
 // Fix react-router Link with MUI Link to prevent page reload
 // Course: https://stackoverflow.com/a/75255458/19271916
@@ -30,21 +33,20 @@ const lightTheme = createTheme({
 	palette: {
 		mode: 'light',
 		primary: {
-			main: '#FFA726', // Soft orange for primary actions and accents
+			main: '#FFA726',
 		},
 		secondary: {
-			main: '#64B5F6', // Light blue for less prominent elements, secondary actions
+			main: '#64B5F6',
 		},
 		background: {
-			default: '#F0F0F0', // Light grey for main background
-			paper: '#FFFFFF', // Pure white for components like Card, Paper, etc.
+			default: '#F0F0F0',
+			paper: '#FFFFFF',
 		},
 		text: {
-			primary: '#202020', // Dark grey for primary text for better readability
-			secondary: '#575757', // Lighter grey for secondary text
+			primary: '#202020',
+			secondary: '#575757',
 		},
-		divider: '#E0E0E0', // Light grey for dividers
-		// Might need to add custom properties to use for borders and hover states, not native to MUI's theme structure
+		divider: '#E0E0E0',
 	},
 	components: {
 		MuiCssBaseline: {
@@ -83,9 +85,7 @@ const lightTheme = createTheme({
 				},
 			},
 		},
-		// ...other component overrides
 	},
-	// ...other theme overrides
 });
 
 // Dark theme
@@ -93,20 +93,19 @@ const darkTheme = createTheme({
 	palette: {
 		mode: 'dark',
 		primary: {
-			main: '#90caf9', // Example primary color for dark mode
+			main: '#90caf9',
 		},
 		secondary: {
-			main: '#f48fb1', // Example secondary color for dark mode
+			main: '#f48fb1',
 		},
 		background: {
-			default: '#0b131d', // Darker background for dark mode
-			paper: '#1f2c3b', // Darker paper components background
+			default: '#0b131d',
+			paper: '#1f2c3b',
 		},
 		text: {
-			primary: '#ffffff', // White for primary text in dark mode
-			secondary: '#bbbbbb', // A lighter gray for secondary text in dark mode
+			primary: '#ffffff',
+			secondary: '#bbbbbb',
 		},
-		// other customizations...
 	},
 	components: {
 		MuiCssBaseline: {
@@ -133,10 +132,7 @@ const darkTheme = createTheme({
 			},
 		},
 	},
-	// ...other theme overrides
 });
-
-  
 
 interface ThemeContextType {
 	theme: Theme;
@@ -145,7 +141,7 @@ interface ThemeContextType {
 
 const defaultContextValue: ThemeContextType = {
 	theme: darkTheme,
-	toggleTheme: () => {}, // dummy function for default value
+	toggleTheme: () => {},
 };
 
 export const ThemeContext =

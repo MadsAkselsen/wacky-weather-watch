@@ -4,7 +4,9 @@
 Build the Docker image 
 `make build`
 Start frontend for local dev
-`make run`
+`make up`
+Stop docker image
+`make down`
 
 ## Run Service and Redis
 `sudo docker-compose up --build`

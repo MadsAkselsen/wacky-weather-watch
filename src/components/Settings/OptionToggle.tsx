@@ -22,8 +22,6 @@ const OptionToggle: React.FC<OptionProps> = ({
 	const [selectedOption, setSelectedOption] = useState<string>(options[0]);
 
 	useEffect(() => {
-		// Update the selected option when the currentValue changes.
-		// This is useful if the settings change from outside this component.
 		setSelectedOption(currentValue);
 	}, [currentValue]);
 
@@ -34,7 +32,6 @@ const OptionToggle: React.FC<OptionProps> = ({
 		if (newOption !== null) {
 			// Prevent deselecting all options
 			setSelectedOption(newOption);
-			// Inside your onChange handler in OptionToggle
 			onOptionChange(newOption); // Notify the parent component of the change
 		}
 	};
@@ -109,14 +106,10 @@ const OptionToggle: React.FC<OptionProps> = ({
 							key={option}
 							sx={{
 								...toggleButtonStyle,
-								// Apply rounded corners to the selected button
 								...(selectedOption === option && {
 									borderRadius: 5,
 								}),
-								// Apply border styling based on the button position
 								border: 'none',
-								//   borderLeft: index > 0 ? `1px solid ${theme.palette.divider}` : "none",
-								//   borderRight: index < options.length - 1 ? `1px solid ${theme.palette.divider}` : "none",
 							}}
 						>
 							{option}
