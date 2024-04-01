@@ -19,3 +19,6 @@ Run tests in all browsers
 
 Run tests in specific browser
 `npx playwright test --project=chromium`
+
+## Architecture
+![Wacky weather app dark](https://github.com/MadsAkselsen/wacky-weather-watch/assets/11229485/25d0f77d-81fb-4821-a2b5-676b9505970d)
