@@ -14,10 +14,9 @@ const CurrentPositionBtn = () => {
 	const generalFetch = useFetchData();
 
 	const handleLocation = async () => {
-
 		if (navigator.geolocation) {
 			navigate('/');
-			setIsLoading(true); // Start loading
+			setIsLoading(true);
 			navigator.geolocation.getCurrentPosition(
 				async (position) => {
 					const { latitude, longitude } = position.coords;
@@ -35,12 +34,12 @@ const CurrentPositionBtn = () => {
 					} catch (error) {
 						console.error('Error getting weather data:', error);
 					} finally {
-						setIsLoading(false); // Stop loading regardless of the result
+						setIsLoading(false);
 					}
 				},
 				(error) => {
 					console.error('Error getting location:', error);
-					setIsLoading(false); // Stop loading on error
+					setIsLoading(false);
 				},
 			);
 		} else {

@@ -25,7 +25,7 @@ const DailyForecast = () => {
 			>
 				5-DAY FORECAST
 			</Typography>
-			<Grid container spacing={2} >
+			<Grid container spacing={2}>
 				{dailyForecast.map((forecast, index) => {
 					const date = new Date(forecast.dt * 1000);
 					const formattedDate = formatDate(date);
@@ -35,11 +35,10 @@ const DailyForecast = () => {
 								sx={{
 									padding: 2,
 									display: 'flex',
-									alignItems: 'center', // Centers items vertically within the card
-									justifyContent: 'space-between', // Spreads out items horizontally
+									alignItems: 'center',
+									justifyContent: 'space-between',
 									textAlign: 'center',
 								}}
-								
 							>
 								<Typography
 									variant="subtitle2"
@@ -60,7 +59,9 @@ const DailyForecast = () => {
 									{forecast.weather[0].main}
 								</Typography>
 							</Box>
-							{index !== dailyForecast.length - 1 && <Divider sx={{ bgcolor: 'grey.900' }} />}
+							{index !== dailyForecast.length - 1 && (
+								<Divider sx={{ bgcolor: 'grey.900' }} />
+							)}
 						</Grid>
 					);
 				})}

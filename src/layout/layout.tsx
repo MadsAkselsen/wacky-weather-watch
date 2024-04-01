@@ -1,5 +1,4 @@
 import { Box, useTheme, useMediaQuery, Grid, Container } from '@mui/material';
-import Cities from 'pages/Cities';
 import WeatherInfo from 'pages/WeatherInfo';
 import { Routes, Route } from 'react-router-dom';
 import NavList from 'components/Navigation/NavList';
@@ -19,9 +18,9 @@ function Layout() {
 		<Box
 			sx={{
 				display: 'flex',
-				flexDirection: 'column', // Stack children vertically
-				height: '100vh', // Make this Box fill the entire viewport height
-				overflow: 'hidden', // Prevent the Box itself from scrolling
+				flexDirection: 'column',
+				height: '100vh',
+				overflow: 'hidden',
 			}}
 		>
 			{isMobile && (
@@ -59,7 +58,7 @@ function Layout() {
 						scrollbarColor: (theme) =>
 							`${theme.palette.primary.main} ${theme.palette.background.default}`, // For Firefox, using theme colors
 						'&::-webkit-scrollbar': {
-							width: '8px', // Adjust as needed
+							width: '8px',
 						},
 						'&::-webkit-scrollbar-track': {
 							backgroundColor: (theme) =>
@@ -70,7 +69,7 @@ function Layout() {
 								theme.palette.primary.main,
 							borderRadius: '20px',
 							border: (theme) =>
-								`3px solid ${theme.palette.background.default}`, // Optional: Add some space between the thumb and track
+								`3px solid ${theme.palette.background.default}`,
 						},
 						width: '100%',
 					}}
@@ -106,13 +105,10 @@ function Layout() {
 						sx={{
 							flexGrow: 1,
 							display: 'flex',
-							// flex: 1
-							// overflow: 'auto',
 						}}
 					>
 						<Routes>
 							<Route path="/" element={<WeatherInfo />} />
-							<Route path="/cities" element={<Cities />} />
 							<Route path="/map" element={<Map />} />
 							<Route path="/settings" element={<Settings />} />
 						</Routes>

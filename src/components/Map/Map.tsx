@@ -75,7 +75,6 @@ const MapComponent: React.FC = () => {
 				duration: 2000,
 			},
 			() => {
-				console.log('Animation completed.');
 				navigate('/');
 			},
 		);

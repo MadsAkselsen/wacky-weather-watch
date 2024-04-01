@@ -64,7 +64,6 @@ export const getWeatherByCity = async (useMockData: boolean, searchData: CityOpt
         const response = await fetch(`${WEATHER_API_BASE_URL}/weather?city=${encodeURIComponent(cityName)}`);
         const data = await response.json();
 
-        // Assume the structure { weatherData, forecastData } for simplicity
         weatherCache.set(cityName.toLowerCase(), data);
 
         return data;

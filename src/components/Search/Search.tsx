@@ -17,7 +17,6 @@ const useSelectStyles = () => {
 			background: theme.palette.background.paper,
 			borderColor: theme.palette.mode === 'dark' ? 'transparent' : '#ccc',
 			boxShadow: 'none',
-			// height: '98%',
 			minWidth: '270px',
 			borderRadius: '10px',
 			'&:hover': {
@@ -64,14 +63,11 @@ const useSelectStyles = () => {
 			...styles,
 			backgroundColor: theme.palette.background.paper,
 			boxShadow: theme.shadows[2],
-			// You might want to add a border or different styles here
 		}),
 		menuList: (styles: CSSObjectWithLabel) => ({
 			...styles,
 			padding: 0,
-			// Any additional styles if needed
 		}),
-		// Add other custom styles based on the theme
 	};
 };
 
@@ -88,7 +84,6 @@ const Search: React.FC = () => {
 
 	const updateWeather = async (searchData: CityOption) => {
 		const weatherData = await generalFetch(getWeatherByCity, searchData)
-		// const weatherData = await getWeatherByCity(searchData);
 		setWeatherData(weatherData);
 	};
 
@@ -106,12 +101,11 @@ const Search: React.FC = () => {
 			})
 			.catch((error) => {
 				console.error('Failed to fetch geo locations', error);
-				// Return the user input as a fallback option
 				return {
 					options: [
 						{
-							value: `fallback-${inputValue}`, // A fallback or dummy value
-							label: `${inputValue}`, // Show the input as an option
+							value: `fallback-${inputValue}`,
+							label: `${inputValue}`,
 						},
 					],
 				};

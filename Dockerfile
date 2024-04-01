@@ -1,27 +1,20 @@
-# Use the official Ubuntu 20.04 LTS as a parent image
-FROM ubuntu:20.04
-
-# Avoiding user interaction with tzdata
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Install Node.js, npm and other dependencies
-RUN apt-get update && apt-get install -y \
-    curl \
-    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-    && apt-get install -y nodejs \
-    && mkdir -p /usr/src/app
+# Use the official Node.js 14 image as a parent image
+FROM node:14
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy the current directory contents into the container at /usr/src/app
-COPY . .
+# Copy the package.json and package-lock.json (if available)
+COPY package*.json ./
 
-# Install any needed packages specified in package.json
+# Install any dependencies
 RUN npm install
+
+# Copy the rest of your app's source code from your host to your image filesystem.
+COPY . .
 
 # Make port 3000 available to the world outside this container
 EXPOSE 3000
 
-# Run npm start when the container launches
+# Run the app
 CMD ["npm", "start"]

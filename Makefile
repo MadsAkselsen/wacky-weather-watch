@@ -1,7 +1,13 @@
+# Define the service name from your docker-compose.yml
+SERVICE_NAME=wacky-weather-app
+
 build:
-	@sudo docker build -t wacky-weather-watch-frontend .
+	@docker-compose build $(SERVICE_NAME)
 
-run:
-	@docker run -p 3000:3000 wacky-weather-watch-frontend
+up:
+	@docker-compose up $(SERVICE_NAME)
 
-all: build run
+down:
+	@docker-compose down
+
+all: down up

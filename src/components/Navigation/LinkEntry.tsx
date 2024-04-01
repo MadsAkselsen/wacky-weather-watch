@@ -5,7 +5,6 @@ import ListItemText from '@mui/material/ListItemText';
 import Link from '@mui/material/Link';
 
 
-// LinkEntry component
 interface LinkEntryProps {
   href: string;
   icon: React.ReactElement;
